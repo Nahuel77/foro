@@ -1,0 +1,43 @@
+.bar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--title-text-light);
+}
+
+.search-bar {
+    margin: 0 0 0 5rem;
+    padding: 0;
+}
+
+.board-btn {
+    margin: 0 1rem;
+    height: 3rem;
+    background-color: rgba(0, 0, 0, 0);
+    color: var(--background-color-light);
+}
+
+input {
+    all: unset;
+    margin: 1rem 0;
+    height: 2rem;
+    border-radius: 10px;
+    border: 1px solid transparent;
+    border-color: var(--button-text-light);
+    background-color: var(--button-background-light);
+    color: var(--button-text-dark);
+}
+
+.search-btn {
+    margin: 5px;
+    border-radius: 15px;
+    color: var(--text-color-light);
+    background-color: rgba(0, 0, 0, 0);
+}
+
+.search-icon {
+    width: 1.1rem;
+    height: 1.1rem;
+    margin: 0;
+    padding: 0;
+}

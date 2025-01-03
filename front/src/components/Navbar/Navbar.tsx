@@ -13,21 +13,21 @@ const Navbar: React.FC = () => {
             <div className="options">
                 {!isAuthenticated ? (
                     <>
-                        <button onClick={() => alert('Login')}>Login</button>
-                        <button onClick={() => alert('Registro')}>Registro</button>
+                        <button onClick={() => alert('Login')} className="navbar-btn">Login</button>
+                        <button onClick={() => alert('Registro')} className="navbar-btn">Registro</button>
                     </>
                 ) : (
                     <>
                         {userRole === 'admin' ? (
                             <>
-                                <button>Usuarios</button>
-                                <button>Reportes</button>
+                                <button className="navbar-btn">Usuarios</button>
+                                <button className="navbar-btn">Reportes</button>
                             </>
                         ) : (
                             <>
                             </>
                         )}
-                        <button onClick={logout}>Logout</button>
+                        <button onClick={logout} className="navbar-btn">Logout</button>
                     </>
                 )}
                 <div className="Toggle-Container">

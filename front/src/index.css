@@ -16,6 +16,7 @@
   --text-color-light: #000000;
   --button-background-light: #e0e0e0;
   --button-text-light: #000000;
+  --title-text-light: green;
 }
 
 [data-theme='dark'] {
@@ -23,6 +24,7 @@
   --text-color-light: #ffffff;
   --button-background-light: #333333;
   --button-text-light: #ffffff;
+  --title-text-light: greenyellow;
 }
 
 @font-face{
@@ -45,7 +47,7 @@ body {
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
-  background-color: var(--background-color-light);
+  background-color: var(--button-background-light);
   color: var(--text-color-light);
 }
 
@@ -53,6 +55,7 @@ h1 {
   font-family: "menu";
   font-size: 3.2em;
   line-height: 1.1;
+
 }
 
 button {
@@ -62,9 +65,8 @@ button {
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
-  /* background-color: #1a1a1a; */
   background-color: var(--button-background-light);
-  color: var(--button-text-light);
+  color: var(--text-color-light);
   cursor: pointer;
   transition: border-color 0.25s;
 }
