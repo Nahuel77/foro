@@ -1,21 +1,25 @@
-import React, { createContext, useState, useContext, ReactNode } from 'react';
+import React, { createContext, useState, useContext, ReactNode, useEffect } from 'react';
 
 const ThemeContext = createContext<any>(null);
 
-export const ThemeProvider: React.FC<{children: ReactNode}> = ({children})=>{
-    const [theme, setTheme] = useState<string>('light');
-    
-    const toggleTheme = () =>{
-        setTheme((prevTheme: string)=>(prevTheme === 'light' ? 'dark' : 'light'));
+export const ThemeProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
+    const [theme, setTheme] = useState<string>('dark');
+
+    const toggleTheme = () => {
+        setTheme((prevTheme: string) => (prevTheme === 'light' ? 'dark' : 'light'));
     };
 
-    return(
+    useEffect(() => {
+        document.body.setAttribute('data-theme', theme);
+    }, [theme]);
+
+    return (
         <ThemeContext.Provider value={{ theme, toggleTheme }}>
             {children}
         </ThemeContext.Provider>
     );
 };
 
-export const useTheme = ()=> {
+export const useTheme = () => {
     return useContext(ThemeContext);
 };

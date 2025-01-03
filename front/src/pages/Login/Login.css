@@ -1,10 +1,21 @@
-form{
+form {
     display: flex;
     flex-direction: column;
     justify-content: center;
     /* align-items: center; */
 }
 
-form *{
+form * {
     margin: 1rem;
+}
+
+input {
+    all: unset;
+    margin: 1rem;
+    height: 3rem;
+    border-radius: 10px;
+    border: 1px solid transparent;
+    border-color: var(--button-text-light);
+    background-color: var(--button-background-light);
+    color: var(--button-text-dark);
 }
