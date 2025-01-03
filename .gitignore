@@ -1,0 +1,6 @@
+# Ignorar node_modules en front y back
+front/node_modules/
+back/node_modules/
+
+# Ignorar archivos de entorno
+**/.env
