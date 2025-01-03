@@ -9,7 +9,9 @@ const Navbar: React.FC = () => {
 
     return (
         <nav>
-            <h1 className="title">Foro</h1>
+            <a href="/" className="home-redirect">
+                <h1 className="title">Foro</h1>
+            </a>
             <div className="options">
                 {!isAuthenticated ? (
                     <>
@@ -31,7 +33,7 @@ const Navbar: React.FC = () => {
                     </>
                 )}
                 <div className="Toggle-Container">
-                    <input type="checkbox" id="select" onChange={toggleTheme} checked={theme === 'dark'}/>
+                    <input type="checkbox" id="select" onChange={toggleTheme} checked={theme === 'dark'} />
                     <label htmlFor="select" className="modo">
                         <div id="detalle"></div>
                     </label>

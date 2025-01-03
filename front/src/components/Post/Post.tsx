@@ -12,6 +12,7 @@ const Post: React.FC = () => {
                     <p className="text-content">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iure, temporibus.</p>
                 </div>
             </div>
+            <hr/>
         </>
     )
 }

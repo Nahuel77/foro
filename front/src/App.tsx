@@ -3,8 +3,8 @@ import './App.css'
 import Navbar from './components/Navbar/Navbar'
 import { AuthProvider } from './context/AuthContext'
 import { ThemeProvider } from './context/ThemeContext'
-import Login from './pages/Login/Login'
-// import Home from './pages/Home/Home'
+// import Login from './pages/Login/Login'
+import Home from './pages/Home/Home'
 // import Register from './pages/Register/Register'
 
 function App() {
@@ -14,7 +14,7 @@ function App() {
       <AuthProvider>
         <ThemeProvider>
           <Navbar />
-          <Login/>
+          <Home/>
         </ThemeProvider>
       </AuthProvider>
     </>
