@@ -1,0 +1,19 @@
+.post{
+    display: flex;
+    flex-direction: column;
+}
+
+.post-name{
+    display: flex;
+    margin: .5rem 1rem;
+}
+
+.post-content{
+    display: flex;
+    margin: 0rem 1rem;
+}
+
+.text-content{
+    padding: 0;
+    margin: 0 0 .5rem 0;
+}

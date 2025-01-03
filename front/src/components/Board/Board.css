@@ -1,0 +1,13 @@
+.board{
+    margin: 1rem;
+    display: inline-block;
+    flex-direction: column;
+    width: auto;
+    border: 2px solid var(--title-text-light);
+}
+
+.board-head{
+    background-color: #535bf2;
+    margin: 0;
+    padding: .5rem;
+}

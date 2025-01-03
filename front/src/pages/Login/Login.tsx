@@ -6,12 +6,12 @@ const Login: React.FC = () => {
     
     return (
         <>
-            <div className="content">
+            <div className="log-content">
                 <h2>Login</h2>
-                <form action="login">
-                    <input type="text" />
-                    <input type="text" />
-                    <button>Entrar</button>
+                <form action="login" className="form">
+                    <input type="text" placeholder="Email"/>
+                    <input type="text" placeholder="Contraseña"/>
+                    <button className="log-btn">Entrar</button>
                 </form>
             </div>
         </>

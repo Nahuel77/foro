@@ -31,7 +31,7 @@
 
 @font-face{
   font-family: "Menu";
-  src: url(../public/font/menulis.ttf);
+  src: url(/font/menulis.ttf);
 }
 
 a {

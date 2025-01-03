@@ -1,4 +1,4 @@
-.log-content{
+.reg-content{
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -6,28 +6,25 @@
     justify-content: center;
 }
 
-.form {
+.form{
     display: flex;
     flex-direction: column;
     min-width: 20vw;
 }
 
-.form * {
-    margin: 1rem;
-}
-
 input {
     all: unset;
-    margin: 1rem;
+    margin: .5rem 0;
     height: 3rem;
     border-radius: 10px;
     border: 1px solid transparent;
     border-color: var(--button-text-light);
     background-color: var(--button-background-light);
     color: var(--button-text-dark);
+    
 }
 
-.log-btn{
+.reg-btn{
     margin: .5rem 0;
     height: 3rem;
     color: var(--title-text-light);
