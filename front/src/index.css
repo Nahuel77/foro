@@ -17,6 +17,7 @@
   --button-background-light: #e0e0e0;
   --button-text-light: #000000;
   --title-text-light: green;
+  --toggle-color-light: #e68a20;
 }
 
 [data-theme='dark'] {
@@ -25,6 +26,7 @@
   --button-background-light: #333333;
   --button-text-light: #ffffff;
   --title-text-light: greenyellow;
+  --toggle-color-light: #535bf2;
 }
 
 @font-face{
