@@ -29,6 +29,15 @@ nav * {
     margin: 0 1rem;
 }
 
+.navbar-btn{
+    color: var(--text-color-light);
+    border: none;
+}
+
+.navbar-btn:hover{
+    color: #535bf2;
+}
+
 /*Toggle Theme*/
 
 .Toggle-Container {

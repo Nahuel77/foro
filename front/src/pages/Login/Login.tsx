@@ -1,22 +1,27 @@
 import React, { useState } from "react";
 import './Login.css';
-import { login } from '../../api/auth.ts';
+import { login as loginAPI } from '../../api/auth.ts';
+import { useAuth } from '../../context/AuthContext';
+import { useNavigate } from 'react-router-dom';
 
 const Login: React.FC = () => {
     const [formData, setFormData] = useState({ email: '', password: '' });
     const [error, setError] = useState<string | null>(null);
+    const { login } = useAuth();
+    const navigate = useNavigate();
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
     };
-
+    
     const handleSubmit = async (e: React.FormEvent) => {
-        e.preventDefault();
+        e.preventDefault(); 
         try {
-            const response = await login(formData);
-            const token = response.data.token;
+            const response = await loginAPI(formData);
+            const { token, role } = response.data;
             localStorage.setItem('token', token);
-            alert('Inicio de sesión exitoso');
+            login(role);
+            navigate('/');
         } catch (err: any) {
             setError(err.response?.data?.message || 'Error al iniciar sesión');
         }

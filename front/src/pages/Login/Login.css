@@ -18,7 +18,7 @@
 
 .log-input {
     all: unset;
-    margin: 1rem;
+    margin: 1rem 0;
     height: 3rem;
     border-radius: 10px;
     border: 1px solid transparent;

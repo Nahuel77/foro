@@ -1,4 +1,4 @@
-import React, { createContext, useState, useContext, ReactNode } from 'react';
+import React, { createContext, useState, useContext, ReactNode, useEffect } from 'react';
 
 interface AuthContextType {
     isAuthenticated: boolean;
@@ -13,6 +13,15 @@ export const AuthProvider: React.FC<{ children: ReactNode}>=({children})=>{
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [userRole, setUserRole] = useState<'admin'|'user'|null>(null);
 
+    useEffect(()=>{
+        const token = localStorage.getItem('token');
+        if(token){
+            const decodedToken = JSON.parse(atob(token.split('.')[1]));
+            setIsAuthenticated(true);
+            setUserRole(decodedToken.role);
+        }
+    }, []);
+
     const login = (role: 'admin' | 'user')=>{
         setIsAuthenticated(true);
         setUserRole(role);
@@ -20,6 +29,7 @@ export const AuthProvider: React.FC<{ children: ReactNode}>=({children})=>{
     const logout=()=>{
         setIsAuthenticated(false);
         setUserRole(null);
+        localStorage.removeItem('token');
     };
 
     return(
