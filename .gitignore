@@ -3,4 +3,4 @@ front/node_modules/
 back/node_modules/
 
 # Ignorar archivos de entorno
-**/.env
+back/.env

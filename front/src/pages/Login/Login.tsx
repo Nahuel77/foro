@@ -27,9 +27,20 @@ const Login: React.FC = () => {
             <div className="log-content">
                 <h2>Login</h2>
                 <form onSubmit={handleSubmit} action="login" className="form">
-                    <input type="text" placeholder="Email" onChange={handleChange} className="log-input"/>
-                    <input type="text" placeholder="Contraseña" onChange={handleChange} className="log-input"/>
-                    <button type="submit" className="log-btn">Entrar</button>
+                    <input name="email"
+                        type="text"
+                        placeholder="Email"
+                        onChange={handleChange}
+                        value={formData.email}
+                        className="log-input" />
+                    <input name="password"
+                        type="text"
+                        placeholder="Contraseña"
+                        onChange={handleChange}
+                        value={formData.password}
+                        className="log-input" />
+                    <button type="submit"
+                        className="log-btn">Entrar</button>
                     {error && <p>{error}</p>}
                 </form>
             </div>

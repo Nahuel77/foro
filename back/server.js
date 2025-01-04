@@ -1,10 +1,23 @@
 const express = require('express');
 const morgan = require('morgan');
 const cors = require('cors');
+const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 dotenv.config();
 
 const app = express();
+
+// Conexión a la BD
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/foro', {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,    
+})
+.then(()=>{
+    console.log('Conexión a la base de datos exitosa');
+})
+.catch((error)=>{
+    console.error('Error al intentar conectar con la base de datos: ', error);
+});
 
 // Middlewares
 app.use(cors({ origin: 'http://localhost:5173', credentials: true }));
