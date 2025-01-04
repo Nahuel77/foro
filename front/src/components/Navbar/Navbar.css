@@ -59,6 +59,8 @@ nav * {
 
 .modo::before{
 	position: absolute;
+    top: -.5px;
+	left: 1.1rem;
 	border-radius: 30px;
 	content: "";
 	background-color: var(--toggle-color-light);

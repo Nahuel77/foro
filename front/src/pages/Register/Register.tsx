@@ -1,7 +1,6 @@
 import React, { useState } from "react";
-import './Register.css'
-import {registerUser} from '../../../../back/controllers/authController.js'
-
+import './Register.css';
+import { register } from '../../api/auth.ts';
 
 const Register: React.FC = () => {
 
@@ -11,16 +10,16 @@ const Register: React.FC = () => {
         password: '',
     });
 
-    const handleChange = (e)=>{
-        setFormData({...formData, [e.target.name]: e.target.name})
+    const handleChange = (e: { target: { name: any; }; }) => {
+        setFormData({ ...formData, [e.target.name]: e.target.name })
     };
 
-    const handleSubmit = async (e)=>{
+    const handleSubmit = async (e: { preventDefault: () => void; }) => {
         e.preventDefault();
-        try{
-            const response = await registerUser(formData);
+        try {
+            const response = await register(formData);
             alert("Registro exitoso");
-        }catch (err){
+        } catch (err: any) {
             alert('Error en el registro: ' + err.response.data.message);
         }
     };
@@ -30,10 +29,10 @@ const Register: React.FC = () => {
             <div className="reg-content">
                 <h2>Registro</h2>
                 <form onSubmit={handleSubmit} action="login" className="form">
-                    <input type="text" placeholder="Email" onChange={handleChange}/>
-                    <input type="text" placeholder="Usuario" onChange={handleChange}/>
-                    <input type="text" placeholder="Contraseña" onChange={handleChange}/>
-                    <input type="text" placeholder="Repetir Contraseña" onChange={handleChange}/>
+                    <input type="text" placeholder="Email" onChange={handleChange} className="reg-input"/>
+                    <input type="text" placeholder="Usuario" onChange={handleChange} className="reg-input"/>
+                    <input type="text" placeholder="Contraseña" onChange={handleChange} className="reg-input"/>
+                    <input type="text" placeholder="Repetir Contraseña" onChange={handleChange} className="reg-input"/>
                     <button type="submit" className="reg-btn">Registrar</button>
                 </form>
             </div>

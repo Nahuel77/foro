@@ -1,7 +1,8 @@
 import React from "react";
 import { useAuth } from "../../context/AuthContext";
 import { useTheme } from "../../context/ThemeContext";
-import "./Navbar.css"
+import { Link } from "react-router-dom";
+import "./Navbar.css";
 
 const Navbar: React.FC = () => {
     const { isAuthenticated, userRole, logout } = useAuth();
@@ -9,14 +10,18 @@ const Navbar: React.FC = () => {
 
     return (
         <nav>
-            <a href="/" className="home-redirect">
+            <Link to="/" className="home-redirect">
                 <h1 className="title">Foro</h1>
-            </a>
+            </Link>
             <div className="options">
                 {!isAuthenticated ? (
                     <>
-                        <button onClick={() => alert('Login')} className="navbar-btn">Login</button>
-                        <button onClick={() => alert('Registro')} className="navbar-btn">Registro</button>
+                        <Link to="/login" className="navbar-btn">
+                            Login
+                        </Link>
+                        <Link to="/register" className="navbar-btn">
+                            Registro
+                        </Link>
                     </>
                 ) : (
                     <>
@@ -25,15 +30,19 @@ const Navbar: React.FC = () => {
                                 <button className="navbar-btn">Usuarios</button>
                                 <button className="navbar-btn">Reportes</button>
                             </>
-                        ) : (
-                            <>
-                            </>
-                        )}
-                        <button onClick={logout} className="navbar-btn">Logout</button>
+                        ) : null}
+                        <button onClick={logout} className="navbar-btn">
+                            Logout
+                        </button>
                     </>
                 )}
                 <div className="Toggle-Container">
-                    <input type="checkbox" id="select" onChange={toggleTheme} checked={theme === 'dark'} />
+                    <input
+                        type="checkbox"
+                        id="select"
+                        onChange={toggleTheme}
+                        checked={theme === 'dark'}
+                    />
                     <label htmlFor="select" className="modo">
                         <div id="detalle"></div>
                     </label>
