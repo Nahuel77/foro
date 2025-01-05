@@ -4,6 +4,7 @@ const cors = require('cors');
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 dotenv.config();
+const postRoutes = require('./routes/postRoutes');
 
 const app = express();
 
@@ -26,7 +27,9 @@ app.use(express.json());
 
 // Rutas
 const authRoutes = require('./routes/auth');
+const postRoutes = require('./routes/postRoutes');
 app.use('/api/auth', authRoutes);
+app.use('/api/posts', postRoutes);
 
 // Puerto
 const PORT = process.env.PORT || 5000;

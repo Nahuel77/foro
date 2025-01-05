@@ -18,6 +18,7 @@
   --button-text-light: #000000;
   --title-text-light: green;
   --toggle-color-light: #e68a20;
+  --background-contrast: #c5c5c5;
 }
 
 [data-theme='dark'] {
@@ -27,6 +28,8 @@
   --button-text-light: #ffffff;
   --title-text-light: greenyellow;
   --toggle-color-light: #535bf2;
+  --background-contrast: #222222;
+
 }
 
 @font-face{
@@ -50,6 +53,7 @@ body {
   height: 100%;
   background-color: var(--button-background-light);
   color: var(--text-color-light);
+  overflow-x: hidden;
 }
 
 h1 {

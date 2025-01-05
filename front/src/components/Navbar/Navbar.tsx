@@ -1,54 +1,21 @@
 import React from "react";
-import { useAuth } from "../../context/AuthContext";
-import { useTheme } from "../../context/ThemeContext";
-import { Link } from "react-router-dom";
 import "./Navbar.css";
+import { Link } from "react-router-dom";
 
 const Navbar: React.FC = () => {
-    const { isAuthenticated, userRole, logout } = useAuth();
-    const { theme, toggleTheme } = useTheme();
 
     return (
-        <nav>
-            <Link to="/" className="home-redirect">
-                <h1 className="title">Foro</h1>
-            </Link>
-            <div className="options">
-                {!isAuthenticated ? (
-                    <>
-                        <Link to="/login" className="navbar-btn">
-                            Login
-                        </Link>
-                        <Link to="/register" className="navbar-btn">
-                            Registro
-                        </Link>
-                    </>
-                ) : (
-                    <>
-                        {userRole === 'admin' ? (
-                            <>
-                                <button className="navbar-btn">Usuarios</button>
-                                <button className="navbar-btn">Reportes</button>
-                            </>
-                        ) : null}
-                        <button onClick={logout} className="navbar-btn">
-                            Logout
-                        </button>
-                    </>
-                )}
-                <div className="Toggle-Container">
-                    <input
-                        type="checkbox"
-                        id="select"
-                        onChange={toggleTheme}
-                        checked={theme === 'dark'}
-                    />
-                    <label htmlFor="select" className="modo">
-                        <div id="detalle"></div>
-                    </label>
+        <>
+            <nav className="bar">
+                <Link to="/secciones" className="board-btn">Secciones</Link>
+                <Link to="" className="board-btn">Últimos Comentarios</Link>
+                <Link to="" className="board-btn">Más visto</Link>
+                <div className="search-bar">
+                    <input type="text" />
+                    <button className="search-btn"><img src="/icon/search.png" alt="search" className="search-icon" /></button>
                 </div>
-            </div>
-        </nav>
+            </nav>
+        </>
     );
 };
 

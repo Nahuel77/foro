@@ -1,4 +1,4 @@
-.log-content{
+.log-content {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -28,7 +28,7 @@
     text-align: center;
 }
 
-.log-btn{
+.log-btn {
     margin: .5rem 0;
     height: 3rem;
     color: var(--title-text-light);
