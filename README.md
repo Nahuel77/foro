@@ -15,5 +15,6 @@ Del lado del back:
 Del lado del front:
 - Vite y React
 - Axios
+- Quill.js (Para el procesamiento de textos en la creación de posteos)
 
 Aun en desarrollo.

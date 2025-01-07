@@ -5,9 +5,10 @@ import { useNavigate } from 'react-router-dom';
 interface SeccionProps {
     title: string;
     seccion: string;
+    descripcion: string;
 }
 
-const Seccion: React.FC<SeccionProps> = ({ title, seccion }) => {   
+const Seccion: React.FC<SeccionProps> = ({ title, seccion, descripcion }) => {   
     const navigate = useNavigate();
 
     const handleNavigate = () => {
@@ -19,7 +20,7 @@ const Seccion: React.FC<SeccionProps> = ({ title, seccion }) => {
             <div className="seccion">
                 <div className="categoria" onClick={handleNavigate}>
                     <h3>{ title }</h3>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing.</p>
+                    <p>{ descripcion }</p>
                 </div>
                 <div className="ultimo-post">
                     <span>Ultimo tema:</span>

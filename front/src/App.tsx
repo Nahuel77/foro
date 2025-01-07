@@ -11,6 +11,7 @@ import General from './pages/General/General';
 import Recursos from './pages/Recursos/Recursos';
 import Consultas from './pages/Consultas/Consultas';
 import Eventos from './pages/Eventos/Eventos';
+import NewPost from './pages/NewPost/NewPost';
 
 const App: React.FC = () => {
     const { isAuthenticated } = useAuth();
@@ -28,6 +29,7 @@ const App: React.FC = () => {
                 ) : (
                     <>
                         <Route path="/usuario" element={<User />} />
+                        <Route path="/nuevopost" element={<NewPost />} />
                         <Route path="*" element={<Navigate to="/" />} />
                     </>
                 )}

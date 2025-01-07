@@ -13,6 +13,8 @@ const Board: React.FC = () => {
                     <Post/>
                     <Post/>
                     <Post/>
+                    <Post/>
+                    <Post/>
                 </div>
             </div>
         </>

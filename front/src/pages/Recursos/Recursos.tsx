@@ -9,7 +9,7 @@ const Recursos: React.FC = () => {
         <>
             <Navbar />
             <div className="recursos-content">
-                <h3>Recursos</h3>
+                <h2>Recursos</h2>
             </div>
         </>
     )

@@ -9,7 +9,7 @@ const Eventos: React.FC = () => {
         <>
             <Navbar />
             <div className="eventos-content">
-                <h3>Eventos</h3>
+                <h2>Eventos</h2>
             </div>
         </>
     )

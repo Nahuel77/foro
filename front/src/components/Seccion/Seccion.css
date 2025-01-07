@@ -17,6 +17,7 @@
     background-color: var(--button-background-light);
     padding: 2rem;
     border-radius: 1rem;
+    min-width: 50%;
 }
 
 .categoria:hover{
