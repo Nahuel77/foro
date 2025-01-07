@@ -7,6 +7,10 @@ import Header from './components/Header/Header';
 import { useAuth } from './context/AuthContext';
 import User from './pages/User/User';
 import Secciones from './pages/Secciones/Secciones';
+import General from './pages/General/General';
+import Recursos from './pages/Recursos/Recursos';
+import Consultas from './pages/Consultas/Consultas';
+import Eventos from './pages/Eventos/Eventos';
 
 const App: React.FC = () => {
     const { isAuthenticated } = useAuth();
@@ -23,11 +27,15 @@ const App: React.FC = () => {
                     </>
                 ) : (
                     <>
-                        <Route path="/secciones" element={<Secciones />} />
                         <Route path="/usuario" element={<User />} />
                         <Route path="*" element={<Navigate to="/" />} />
                     </>
                 )}
+                <Route path="/secciones" element={<Secciones />} />
+                <Route path="/general" element={<General />} />
+                <Route path="/recursos" element={<Recursos />} />
+                <Route path="/consultas" element={<Consultas />} />
+                <Route path="/eventos" element={<Eventos />} />
             </Routes>
         </>
     );

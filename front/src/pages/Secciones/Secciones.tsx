@@ -1,7 +1,7 @@
 import React from "react";
 import './Secciones.css';
 import Navbar from "../../components/Navbar/Navbar";
-import Seccion from "../../components/Seccion/seccion";
+import Seccion from "../../components/Seccion/Seccion";
 
 const Secciones: React.FC = () => {
 
@@ -11,10 +11,10 @@ const Secciones: React.FC = () => {
             <div className="secciones-content">
                 <h2 className="secciones-titulo">Secciones</h2>
                 <div className="secciones">
-                    <Seccion/>
-                    <Seccion/>
-                    <Seccion/>
-                    <Seccion/>
+                    <Seccion title="General" seccion="/general"/>
+                    <Seccion title="Recuros" seccion="/recursos"/>
+                    <Seccion title="Consultas" seccion="/consultas"/>
+                    <Seccion title="Eventos" seccion="/eventos"/>
                 </div>
             </div>
         </>

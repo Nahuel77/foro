@@ -1,13 +1,24 @@
 import React from "react";
 import './Seccion.css';
+import { useNavigate } from 'react-router-dom';
 
-const Seccion: React.FC = () => {
+interface SeccionProps {
+    title: string;
+    seccion: string;
+}
+
+const Seccion: React.FC<SeccionProps> = ({ title, seccion }) => {   
+    const navigate = useNavigate();
+
+    const handleNavigate = () => {
+        navigate(`${seccion}`);
+    };
 
     return (
         <>
             <div className="seccion">
-                <div className="categoria">
-                    <h3>Seccion</h3>
+                <div className="categoria" onClick={handleNavigate}>
+                    <h3>{ title }</h3>
                     <p>Lorem ipsum dolor sit amet consectetur adipisicing.</p>
                 </div>
                 <div className="ultimo-post">
