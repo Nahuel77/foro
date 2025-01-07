@@ -12,5 +12,15 @@ h2{
 .add-panel{
     border: 2px solid var(--title-text-light);
     width: 95%;
-    height: 60vh;
+    height: auto;
+    padding: 1rem;
+}
+
+.post-title{
+    font-size: large;
+    padding: 0 1rem;
+}
+
+.title-input{
+    width: 90%;
 }
