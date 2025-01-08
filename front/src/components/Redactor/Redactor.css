@@ -4,22 +4,22 @@
 }
 
 .editor-container {
-    height: 15rem;
+    height: 20rem;
 }
 
 .ql-toolbar{
-    background-color: rgb(176, 174, 199);
+    background-color: rgb(234, 234, 236);
     height: 3rem;
 }
 
 .ql-editor{
-    background-color: rgb(176, 174, 199);
+    background-color: rgb(234, 234, 236);
     height: 100%;
 }
 
 .text-form{
     color: black;
-    height: 12rem;
+    height: 17rem;
 }
 
 .btn-editor{

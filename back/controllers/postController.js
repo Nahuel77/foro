@@ -1,11 +1,17 @@
 const Post = require('../models/post');
 
 const createPost = async (req, res)=>{
-    const { title, content } = req.body;
+    const { title, content, seccion } = req.body;
     const user = req.userId;
 
+    console.log('userId: ', user);
+
+    if (!user) {
+        return res.status(400).json({ error: 'No se encontró el usuario asociado al token' });
+    }
+
     try{
-        const post = new Post({ title, content, user});
+        const post = new Post({ title, content, seccion, user });
         await post.save();
 
         res.status(201).json({ message: 'Post agregado existosamente', post});

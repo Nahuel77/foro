@@ -6,14 +6,17 @@
 }
 
 h2{
-    padding: 2rem 0 1rem 0;
+    padding: 0rem 0 0rem 0;
 }
 
 .add-panel{
-    border: 2px solid var(--title-text-light);
     width: 95%;
     height: auto;
     padding: 1rem;
+}
+
+.title-conteiner{
+    padding-bottom: 1rem;
 }
 
 .post-title{
@@ -23,4 +26,5 @@ h2{
 
 .title-input{
     width: 90%;
+    padding: .5rem;
 }
