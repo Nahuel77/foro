@@ -10,4 +10,9 @@ export const login = (formData: { email: string; password: string }) => {
 
 export const newPost = (formData: { title: string; content: string; seccion: string }) => {
   return API.post('/api/posts/newpost', formData);
-}
+};
+
+export const loadPosts = (queryParams: { [key: string ]: any } = {})=>{
+  const query = new URLSearchParams(queryParams).toString();
+  return API.get(`/api/posts/getposts${query ? `?${query}` : ''}`);
+};

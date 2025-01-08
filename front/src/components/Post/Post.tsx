@@ -1,18 +1,21 @@
 import React from "react";
-import './Post.css'
+import './Post.css';
 
+interface PostProps {
+    title: string;
+    content: string;
+}
 
-const Post: React.FC = () => {
-
+const Post: React.FC<PostProps> = ({ title, content }) => {
     return (
         <>
             <div className="post">
-                <h3 className="post-name">title</h3>
+                <h3 className="post-name">{title}</h3>
                 <div className="post-content">
-                    <p className="text-content">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iure, temporibus.</p>
+                    <div dangerouslySetInnerHTML={{ __html: content }} />
                 </div>
             </div>
-            <hr/>
+            <hr />
         </>
     )
 }
