@@ -12,6 +12,7 @@ import Recursos from './pages/Recursos/Recursos';
 import Consultas from './pages/Consultas/Consultas';
 import Eventos from './pages/Eventos/Eventos';
 import NewPost from './pages/NewPost/NewPost';
+import OnPost from './pages/OnPost/OnPost';
 
 const App: React.FC = () => {
     const { isAuthenticated } = useAuth();
@@ -38,6 +39,7 @@ const App: React.FC = () => {
                 <Route path="/recursos" element={<Recursos />} />
                 <Route path="/consultas" element={<Consultas />} />
                 <Route path="/eventos" element={<Eventos />} />
+                <Route path="/post" element={<OnPost />} />  
             </Routes>
         </>
     );

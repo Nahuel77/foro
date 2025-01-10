@@ -3,10 +3,10 @@ const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 
 const registerUser = async (req, res) => {
-    const { username, email, password } = req.body;
+    const { userName, email, password } = req.body;
 
     try {
-        const user = new User({ username, email, password });
+        const user = new User({ userName, email, password });
         await user.save();
 
         res.status(201).json({ message: 'Usuario registrado exitosamente' });
@@ -26,7 +26,7 @@ const loginUser = async (req, res) => {
         if (!isMatch) return res.status(401).json({ error: 'Credenciales inválidas' });
 
         const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
-        res.status(200).json({ token });
+        res.status(200).json({ token, userName: user.userName });
     } catch (error) {
         res.status(500).json({ error: 'Error al iniciar sesión' });
     }

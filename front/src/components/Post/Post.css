@@ -3,9 +3,27 @@
     flex-direction: column;
 }
 
+.head{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin: 1rem 1rem 0;
+}
+
+span{
+    margin: 0 1rem;
+}
+
 .post-name{
     display: flex;
     margin: .5rem 1rem;
+}
+
+.head:hover{
+    cursor: pointer;
+    color: #535bf2;
+    background-color: var(--background-contrast);
+    border-radius: 1rem;
 }
 
 .post-content{
@@ -16,4 +34,8 @@
 .text-content{
     padding: 0;
     margin: 0 0 .5rem 0;
+}
+
+hr{
+    margin: 0;
 }

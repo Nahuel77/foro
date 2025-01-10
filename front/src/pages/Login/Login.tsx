@@ -13,14 +13,14 @@ const Login: React.FC = () => {
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
     };
-    
+
     const handleSubmit = async (e: React.FormEvent) => {
-        e.preventDefault(); 
+        e.preventDefault();
         try {
             const response = await loginAPI(formData);
-            const { token, role } = response.data;
+            const { token, userName } = response.data; //agregar userName
             localStorage.setItem('token', token);
-            login(role);
+            login('user', userName);
             navigate('/');
         } catch (err: any) {
             setError(err.response?.data?.message || 'Error al iniciar sesión');

@@ -19,6 +19,10 @@
     align-items: center;
 }
 
+.board-btn:hover{
+    color: var(--select-color-text);
+}
+
 input {
     all: unset;
     margin: 1rem 0;

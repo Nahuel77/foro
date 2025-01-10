@@ -31,9 +31,10 @@ const Board: React.FC = () => {
                                 key={post._id}
                                 title={post.title}
                                 content={post.content}
+                                userName={post.userName}
                             />
                         ))
-                    ):(
+                    ) : (
                         <p className="no-post">No hay posts disponibles.</p>
                     )}
                 </div>

@@ -5,7 +5,7 @@ import { register } from '../../api/auth.ts';
 const Register: React.FC = () => {
 
     const [formData, setFormData] = useState({
-        username: '',
+        userName: '',
         email: '',
         password: '',
     });
@@ -35,10 +35,10 @@ const Register: React.FC = () => {
                         value={formData.email}
                         onChange={handleChange}
                         className="reg-input" />
-                    <input name="username"
+                    <input name="userName"
                         type="text"
                         placeholder="Usuario"
-                        value={formData.username}
+                        value={formData.userName}
                         onChange={handleChange}
                         className="reg-input" />
                     <input name="password"
