@@ -11,10 +11,12 @@ Del lado del back:
 - CORS
 - bcryptjs
 - MongoDB (mongoose)
+- DOMPurify & JSDOM
 
 Del lado del front:
 - Vite y React
 - Axios
 - Quill.js (Para el procesamiento de textos en la creación de posteos)
+- DOMPurify
 
 Aun en desarrollo.

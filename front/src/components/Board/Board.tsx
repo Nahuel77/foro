@@ -34,7 +34,7 @@ const Board: React.FC = () => {
                             />
                         ))
                     ):(
-                        <p>No hay posts disponibles.</p>
+                        <p className="no-post">No hay posts disponibles.</p>
                     )}
                 </div>
             </div>
