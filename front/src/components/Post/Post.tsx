@@ -4,17 +4,18 @@ import DOMPurify from "dompurify";
 import { useNavigate } from "react-router-dom";
 
 interface PostProps {
+    id: string;
     title: string;
     content: string;
     userName: string;
 }
 
-const Post: React.FC<PostProps> = ({ title, content, userName }) => {
+const Post: React.FC<PostProps> = ({ id, title, content, userName }) => {
     const sanitizedContent = DOMPurify.sanitize(content);
     const navigate = useNavigate();
 
     const handleNavigate = () => {
-        navigate("/post");
+        navigate(`/post/${id}`);
     };
 
     return (
@@ -22,11 +23,11 @@ const Post: React.FC<PostProps> = ({ title, content, userName }) => {
             <div className="post">
                 <div className="head" onClick={handleNavigate}>
                     <h3 className="post-name">{title}</h3>
-                    <span>por: {userName}</span>
+                    <span className="post-creator">por : {userName}</span>
                 </div>
-                <div className="post-content">
+                {/* <div className="post-content">
                     <div dangerouslySetInnerHTML={{ __html: sanitizedContent }} />
-                </div>
+                </div> */}
             </div>
             <hr />
         </>

@@ -1,13 +1,14 @@
 import React from "react";
 import './User.css';
+import { useAuth } from "../../context/AuthContext";
 
 const User: React.FC = () => {
-
+    const user = useAuth();
 
     return (
         <>
             <div className="user-panel">
-                <h2>Usuario</h2>
+                <h2>{user.userName}</h2>
                 <div className="panel-content">
                     <div className="panel-foto">
                         <img src="/icon/user.png" alt="user" className="user-img" />

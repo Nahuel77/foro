@@ -3,7 +3,6 @@ import './Board.css'
 import Post from "../Post/Post";
 import { loadPosts } from "../../api/auth";
 
-
 const Board: React.FC = () => {
     const [posts, setPosts] = useState<any[]>([]);
 
@@ -28,7 +27,7 @@ const Board: React.FC = () => {
                     {posts.length > 0 ? (
                         posts.map((post) => (
                             <Post
-                                key={post._id}
+                                id={post._id}
                                 title={post.title}
                                 content={post.content}
                                 userName={post.userName}

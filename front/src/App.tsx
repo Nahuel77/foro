@@ -39,7 +39,7 @@ const App: React.FC = () => {
                 <Route path="/recursos" element={<Recursos />} />
                 <Route path="/consultas" element={<Consultas />} />
                 <Route path="/eventos" element={<Eventos />} />
-                <Route path="/post" element={<OnPost />} />  
+                <Route path="/post/:id" element={<OnPost />} />  
             </Routes>
         </>
     );

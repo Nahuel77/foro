@@ -16,3 +16,7 @@ export const loadPosts = (queryParams: { [key: string ]: any } = {})=>{
   const query = new URLSearchParams(queryParams).toString();
   return API.get(`/api/posts/getposts${query ? `?${query}` : ''}`);
 };
+
+export const getPostById = (id: string) => {
+  return API.get(`/api/posts/${id}`);
+};

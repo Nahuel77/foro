@@ -3,12 +3,14 @@ import './NewPost.css';
 import Redactor from "../../components/Redactor/Redactor";
 import { newPost } from "../../api/auth";
 import { useAuth } from "../../context/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 const NewPost: React.FC = () => {
     const [title, setTitle] = useState('');
     const [content, setContent] = useState('');
     const [seccion, setSeccion ] = useState('General');
     const { userName } = useAuth();
+    const navigate = useNavigate();
 
     const handleSavePost = async () => {
 
@@ -20,6 +22,7 @@ const NewPost: React.FC = () => {
         try {
             const response = await newPost({ title, content, seccion, userName });
             alert('Post agregado');
+            navigate('/');
         } catch (err: any) {
             console.error('Error al crear el post: ', err.response?.data || err.message);
             alert('Error al intentar crear el post');
