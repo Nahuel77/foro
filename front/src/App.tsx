@@ -30,7 +30,7 @@ const App: React.FC = () => {
                 ) : (
                     <>
                         <Route path="/usuario" element={<User />} />
-                        <Route path="/nuevopost" element={<NewPost />} />
+                        <Route path="/:seccion/nuevopost" element={<NewPost />} />
                         <Route path="*" element={<Navigate to="/" />} />
                     </>
                 )}

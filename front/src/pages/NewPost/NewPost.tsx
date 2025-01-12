@@ -3,12 +3,13 @@ import './NewPost.css';
 import Redactor from "../../components/Redactor/Redactor";
 import { newPost } from "../../api/auth";
 import { useAuth } from "../../context/AuthContext";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 const NewPost: React.FC = () => {
     const [title, setTitle] = useState('');
     const [content, setContent] = useState('');
-    const [seccion, setSeccion ] = useState('General');
+    const location = useLocation();
+    const { seccion } = location.state || {};
     const { userName } = useAuth();
     const navigate = useNavigate();
 

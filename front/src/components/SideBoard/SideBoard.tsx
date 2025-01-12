@@ -2,12 +2,17 @@ import React from "react";
 import './SideBoard.css';
 import { useNavigate } from "react-router-dom";
 
+interface SideBoardProps {
+    seccion: string;
+}
 
-const SideBoard: React.FC = () => {
+
+const SideBoard: React.FC<SideBoardProps> = ({ seccion }) => {
     const navigate = useNavigate();
 
     const handleNavigate = () => {
-        navigate("/nuevopost");
+        // console.log(seccion);
+        navigate(`/${seccion}/nuevopost`, { state: { seccion } });
     };
 
     return (
@@ -15,7 +20,7 @@ const SideBoard: React.FC = () => {
             <div className="sideboard-content">
                 <div className="add-tema-content" onClick={handleNavigate}>
                     <img src="/icon/add-icon.svg" alt="nuevo post" className="add-post-icon" />
-                    <span>Agregar Tema</span>
+                    <span className="add-post-span">Agregar Tema</span>
                 </div>
             </div>
         </>

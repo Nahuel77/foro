@@ -8,6 +8,7 @@ import { useAuth } from "../../context/AuthContext";
 
 const General: React.FC = () => {
     const { isAuthenticated } = useAuth();
+    const seccion = 'general';
 
     return (
         <>
@@ -21,7 +22,7 @@ const General: React.FC = () => {
                         </>
                     ) : (
                         <>
-                            <SideBoard />
+                            <SideBoard seccion={seccion} />
                             <Board />
                         </>
                     )}
