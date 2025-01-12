@@ -18,12 +18,12 @@ const General: React.FC = () => {
                 <div className="board-content">
                     {!isAuthenticated ? (
                         <>
-                            <Board />
+                            <Board seccion={seccion} />
                         </>
                     ) : (
                         <>
                             <SideBoard seccion={seccion} />
-                            <Board />
+                            <Board seccion={seccion} />
                         </>
                     )}
                 </div>
