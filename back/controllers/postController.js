@@ -28,7 +28,7 @@ const getPosts = async (req, res) => {
         const posts = await Post.find(filter);
         res.status(200).json(posts);
     } catch (err) {
-        console.error('Error en getPosts:', err);
+        console.error('Error en getPosts: ', err);
         res.status(500).json({ error: 'Error al obtener los posts', details: err.message });
     }
 }

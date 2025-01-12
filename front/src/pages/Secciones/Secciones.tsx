@@ -1,9 +1,24 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import './Secciones.css';
 import Navbar from "../../components/Navbar/Navbar";
 import Seccion from "../../components/Seccion/Seccion";
+import { loadSecciones } from "../../api/auth";
 
 const Secciones: React.FC = () => {
+    const [secciones, setSecciones] = useState<any[]>([]);
+
+    const fetchSecciones = async () => {
+        try {
+            const response = await loadSecciones({});
+            setSecciones(response.data);
+        } catch (err) {
+            console.error('Error al cargar los posts: ', err);
+        }
+    };
+
+    useEffect(() => {
+        fetchSecciones();
+    }, []);
 
     return (
         <>
@@ -11,22 +26,18 @@ const Secciones: React.FC = () => {
             <div className="secciones-content">
                 <h2 className="secciones-titulo">Secciones</h2>
                 <div className="secciones">
-                    <Seccion title="General"
-                    seccion="/general"
-                    descripcion="Comparte ideas, presenta nuevos miembros y conversa sobre cualquier tema."
-                    />
-                    <Seccion title="Recuros"
-                    seccion="/recursos"
-                    descripcion="Encuentra y comparte guías, materiales y enlaces útiles."
-                    />
-                    <Seccion title="Eventos"
-                    seccion="/eventos"
-                    descripcion="Entérate de los próximos eventos y noticias importantes."
-                    />
-                    <Seccion title="Consultas"
-                    seccion="/consultas"
-                    descripcion="Haz preguntas y recibe ayuda de la comunidad."
-                    />
+
+                    {secciones.length > 0 ? (
+                        secciones.map((seccion) => (
+                            <Seccion
+                                title={seccion.title}
+                                seccion={`/${seccion.seccion}`}
+                                descripcion={seccion.description}
+                            />
+                        ))
+                    ) : (
+                        <p className="no-post">No hay posts disponibles.</p>
+                    )}
                 </div>
             </div>
         </>

@@ -27,8 +27,10 @@ app.use(express.json());
 // Rutas
 const authRoutes = require('./routes/auth');
 const postRoutes = require('./routes/postRoutes');
+const seccionesRoutes = require('./routes/seccionesRoutes');
 app.use('/api/auth', authRoutes);
 app.use('/api/posts', postRoutes);
+app.use('/api/secciones', seccionesRoutes);
 
 // Puerto
 const PORT = process.env.PORT || 5000;

@@ -12,11 +12,16 @@ export const newPost = (formData: { title: string; content: string; seccion: str
   return API.post('/api/posts/newpost', formData);
 };
 
-export const loadPosts = (queryParams: { [key: string ]: any } = {})=>{
+export const loadPosts = (queryParams: { [key: string]: any } = {}) => {
   const query = new URLSearchParams(queryParams).toString();
   return API.get(`/api/posts/getposts${query ? `?${query}` : ''}`);
 };
 
 export const getPostById = (id: string) => {
   return API.get(`/api/posts/${id}`);
+};
+
+export const loadSecciones = (queryParams: { [key: string]: any } = {}) => {
+  const query = new URLSearchParams(queryParams).toString();
+  return API.get(`/api/secciones/getsection${query ? `?${query}` : ''}`);
 };
