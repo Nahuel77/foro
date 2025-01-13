@@ -27,13 +27,25 @@ const OnPost: React.FC = () => {
 
     if(!post) return <p>Cargando post...</p>;
 
+    const fechaFormateada = post ? `${new Date(post.createdAt).toLocaleDateString('es-ES', { 
+        day: '2-digit', 
+        month: '2-digit', 
+        year: 'numeric' 
+      }).replace(/\//g, '-')} ${new Date(post.createdAt).toLocaleTimeString('es-ES', { 
+        hour: '2-digit', 
+        minute: '2-digit', 
+        hour12: false 
+      })}`
+    : '';
+
     return (
         <>
             <Navbar />
             <div className='post-container'>
                 <h2 className='post-title'>{post.title}</h2>
                 <div className='post-content'>
-                    <h4>autor: {post.userName}</h4>
+                    <h3>autor: {post.userName}</h3>
+                    <span>fecha: {fechaFormateada}</span>
                     <div dangerouslySetInnerHTML={{ __html: sanitizedContent }} />
                 </div>
             </div>

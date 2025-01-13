@@ -35,6 +35,7 @@ const Board: React.FC<BoardProps> = ({ seccion }) => {
                                 title={post.title}
                                 content={post.content}
                                 userName={post.userName}
+                                date={post.createdAt}
                             />
                         ))
                     ) : (
