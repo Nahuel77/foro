@@ -42,7 +42,7 @@ const getPostById = async (req, res) => {
     } catch (err) {
         res.status(500).json({ error: 'Error al obtener el post' });
     }
-}
+};
 
 const createComment = async (req, res) => {
     const { content, userName } = req.body;
@@ -58,9 +58,20 @@ const createComment = async (req, res) => {
 
         res.status(201).json({ message: 'Post agregado existosamente', post });
     }catch (err){
-        console.error('Error al intentar crear el comentario: ', err);
+        console.error('Error al intentar crear el comentario: ', err.message);
         res.status(500).json({ error: 'Error al obtener el post' });
     }
 };
 
-module.exports = { createPost, getPosts, getPostById, createComment };
+const getComment = async (req, res) => {
+    try {
+        const comment = await Comment.findById(req.params.id);
+        if(!comment) return res.status(404).json({ error: 'Post no encontrado' });
+        res.status(200).json(comment);
+    } catch (err) {
+        console.error('Error al obtener los comentarios: ', err);
+        res.status(500).json({ error: 'Error al obtener el comentario', details: err.message});
+    }
+};
+
+module.exports = { createPost, getPosts, getPostById, createComment, getComment };

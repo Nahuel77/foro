@@ -5,7 +5,8 @@ import { useEffect, useState } from 'react';
 import { getPostById } from '../../api/auth';
 import DOMPurify from "dompurify";
 import { useAuth } from '../../context/AuthContext';
-import Comment from '../../components/Comment/Comment';
+import AddComment from '../../components/AddComment/AddComment';
+import Comments from '../../components/Comments/Comments';
 
 const OnPost: React.FC = () => {
     const { id } = useParams<{ id: string }>();
@@ -49,16 +50,17 @@ const OnPost: React.FC = () => {
                     <span>fecha: {fechaFormateada}</span>
                     <div dangerouslySetInnerHTML={{ __html: sanitizedContent }} />
                 </div>
-                <div>
+                <div className='comment-container'>
                     <h3>comentarios: </h3>
                     <div>
                         {!isAuthenticated ? (
                             <>
-                                <p>Cargando comentarios...</p>
+                                <Comments id={id!} />
                             </>
                         ) : (
                             <>
-                                <Comment/>
+                                <Comments id={id!} />
+                                <AddComment/>
                             </>
                         )}
                     </div>

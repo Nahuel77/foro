@@ -30,3 +30,7 @@ export const newComment = (queryParams: {[key: string]: any} = {}) => {
   const query = new URLSearchParams(queryParams).toString();
   return API.get(`/api/post/newcomment${query ? `?${query}` : ''}`);
 };
+
+export const getComment = (id: string) => {
+  return API.get(`/api/posts/getcomment${id}`);
+}

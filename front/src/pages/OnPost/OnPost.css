@@ -14,3 +14,9 @@
     flex-direction: column;
     margin: 0 2rem;
 }
+
+.comment-container{
+    display: flex;
+    flex-direction: column;
+    width: 95%;
+}
