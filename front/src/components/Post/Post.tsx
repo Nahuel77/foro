@@ -38,9 +38,6 @@ const Post: React.FC<PostProps> = ({ id, title, content, userName, date }) => {
                     <span className="post-creator">por : {userName}</span>
                     <span className="post-creator">fecha : {fechaFormateada}</span>
                 </div>
-                {/* <div className="post-content">  
-                    <div dangerouslySetInnerHTML={{ __html: sanitizedContent }} />
-                </div> */}
             </div>
             <hr />
         </>

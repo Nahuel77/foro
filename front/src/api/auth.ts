@@ -25,3 +25,8 @@ export const loadSecciones = (queryParams: { [key: string]: any } = {}) => {
   const query = new URLSearchParams(queryParams).toString();
   return API.get(`/api/secciones/getsection${query ? `?${query}` : ''}`);
 };
+
+export const newComment = (queryParams: {[key: string]: any} = {}) => {
+  const query = new URLSearchParams(queryParams).toString();
+  return API.get(`/api/post/newcomment${query ? `?${query}` : ''}`);
+};

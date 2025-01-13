@@ -11,4 +11,6 @@ router.get('/getposts', getPosts );
 
 router.get('/:id', getPostById);
 
+router.post('/newcomment', authMiddleware, sanitizeMiddleware, createComment);
+
 module.exports = router;

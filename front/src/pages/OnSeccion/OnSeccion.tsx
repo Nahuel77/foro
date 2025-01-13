@@ -10,7 +10,6 @@ const OnSeccion: React.FC = () => {
     const { isAuthenticated } = useAuth();
     const location = useLocation();
     const { seccion, title } = location.state || {};
-    console.log(seccion);
 
     return (
         <>

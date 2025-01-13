@@ -8,7 +8,8 @@ const PostSchema = new mongoose.Schema({
     seccion: { type: String, required: true },
     content: { type: String, required: true },
     image: { type: Buffer },
-    createdAt: { type: Date, default: Date.now }
+    createdAt: { type: Date, default: Date.now },
+    // comentId: { type: String, required: false }
 });
 
 module.exports = mongoose.model('Post', PostSchema);

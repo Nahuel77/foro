@@ -4,12 +4,15 @@ import './OnPost.css';
 import { useEffect, useState } from 'react';
 import { getPostById } from '../../api/auth';
 import DOMPurify from "dompurify";
+import { useAuth } from '../../context/AuthContext';
+import Comment from '../../components/Comment/Comment';
 
 const OnPost: React.FC = () => {
-    const { id } = useParams< {id: string} >();
+    const { id } = useParams<{ id: string }>();
     const [post, setPost] = useState<any | null>(null);
-    
-    const fetchPosts = async ()=> {
+    const { isAuthenticated } = useAuth();
+
+    const fetchPosts = async () => {
         try {
             const response = await getPostById(id as string);
             setPost(response.data);
@@ -18,25 +21,23 @@ const OnPost: React.FC = () => {
         }
     };
 
-    
-    useEffect(()=>{
+    useEffect(() => {
         fetchPosts();
     }, [id]);
-    
+
     const sanitizedContent = post ? DOMPurify.sanitize(post.content) : "";
 
-    if(!post) return <p>Cargando post...</p>;
+    if (!post) return <p>Cargando post...</p>;
 
-    const fechaFormateada = post ? `${new Date(post.createdAt).toLocaleDateString('es-ES', { 
-        day: '2-digit', 
-        month: '2-digit', 
-        year: 'numeric' 
-      }).replace(/\//g, '-')} ${new Date(post.createdAt).toLocaleTimeString('es-ES', { 
-        hour: '2-digit', 
-        minute: '2-digit', 
-        hour12: false 
-      })}`
-    : '';
+    const fechaFormateada = post ? `${new Date(post.createdAt).toLocaleDateString('es-ES', {
+        day: '2-digit',
+        month: '2-digit',
+        year: 'numeric'
+    }).replace(/\//g, '-')} ${new Date(post.createdAt).toLocaleTimeString('es-ES', {
+        hour: '2-digit',
+        minute: '2-digit',
+        hour12: false
+    })}` : '';
 
     return (
         <>
@@ -47,6 +48,20 @@ const OnPost: React.FC = () => {
                     <h3>autor: {post.userName}</h3>
                     <span>fecha: {fechaFormateada}</span>
                     <div dangerouslySetInnerHTML={{ __html: sanitizedContent }} />
+                </div>
+                <div>
+                    <h3>comentarios: </h3>
+                    <div>
+                        {!isAuthenticated ? (
+                            <>
+                                <p>Cargando comentarios...</p>
+                            </>
+                        ) : (
+                            <>
+                                <Comment/>
+                            </>
+                        )}
+                    </div>
                 </div>
             </div>
         </>
