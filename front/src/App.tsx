@@ -13,6 +13,7 @@ import Consultas from './pages/Consultas/Consultas';
 import Eventos from './pages/Eventos/Eventos';
 import NewPost from './pages/NewPost/NewPost';
 import OnPost from './pages/OnPost/OnPost';
+import OnSeccion from './pages/OnSeccion/OnSeccion';
 
 const App: React.FC = () => {
     const { isAuthenticated } = useAuth();
@@ -35,10 +36,10 @@ const App: React.FC = () => {
                     </>
                 )}
                 <Route path="/secciones" element={<Secciones />} />
-                <Route path="/general" element={<General />} />
-                <Route path="/recursos" element={<Recursos />} />
-                <Route path="/consultas" element={<Consultas />} />
-                <Route path="/eventos" element={<Eventos />} />
+                <Route path="/general" element={<OnSeccion />} />
+                <Route path="/recursos" element={<OnSeccion />} />
+                <Route path="/consultas" element={<OnSeccion />} />
+                <Route path="/eventos" element={<OnSeccion />} />
                 <Route path="/post/:id" element={<OnPost />} />  
             </Routes>
         </>

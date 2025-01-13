@@ -31,7 +31,7 @@ const Secciones: React.FC = () => {
                         secciones.map((seccion) => (
                             <Seccion
                                 title={seccion.title}
-                                seccion={`/${seccion.seccion}`}
+                                seccion={seccion.seccion}
                                 descripcion={seccion.description}
                             />
                         ))

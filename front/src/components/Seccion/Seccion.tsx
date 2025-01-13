@@ -12,7 +12,7 @@ const Seccion: React.FC<SeccionProps> = ({ title, seccion, descripcion }) => {
     const navigate = useNavigate();
 
     const handleNavigate = () => {
-        navigate(`${seccion}`);
+        navigate(`/${seccion}`, { state: { title, seccion } });
     };
 
     return (
