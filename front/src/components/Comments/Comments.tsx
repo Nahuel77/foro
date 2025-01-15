@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { getComment } from '../../api/auth';
+import { getComments } from '../../api/auth';
 import './Comments.css';
 
 interface CommentProps {
@@ -11,7 +11,8 @@ const Comments: React.FC<CommentProps> = ({ id }) => {
 
     const fetchComments = async () => {
         try {
-            const response = await getComment(id as string);
+            // console.log(id);
+            const response = await getComments(id);
             setComments(response.data);
         } catch (err) {
             console.error('Error al consultar comentarios: ', err);

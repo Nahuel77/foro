@@ -6,7 +6,7 @@ const CommentSchema = new mongoose.Schema({
     parentCommentId: { type: mongoose.Schema.Types.ObjectId, ref: 'comment', default: null },
     user: { type: mongoose.Schema.Types.ObjectId, ref: 'user', required: true },
     userName: { type: String, required: true },
-    commentContent: { type: String, required: true },
+    content: { type: String, required: true },
     date: { type: Date, default: Date.now }
 });
 

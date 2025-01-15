@@ -5,7 +5,11 @@ import './AddComment.css';
 import { useNavigate } from 'react-router-dom';
 import { newComment } from '../../api/auth';
 
-const AddComment: React.FC = () => {
+interface AddCommentProps{
+    postId: string;
+}
+
+const AddComment: React.FC<AddCommentProps> = ({ postId }) => {
     const [content, setContent] = useState('');
     const { userName } = useAuth();
     const navigate = useNavigate();
@@ -18,12 +22,12 @@ const AddComment: React.FC = () => {
         }
 
         try {
-            const response = await newComment({ content, userName });
-            alert('Post agregado');
+            const response = await newComment({ content, userName, postId });
+            alert('Comentario agregado');
             navigate('/');
         } catch (err: any) {
-            console.error('Error al crear el post: ', err.response?.data || err.message);
-            alert('Error al intentar crear el post');
+            console.error('Error al crear el comentario: ', err.response?.data || err.message);
+            alert('Error al intentar crear el comentario');
         }
     }
 

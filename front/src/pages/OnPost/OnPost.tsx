@@ -59,8 +59,8 @@ const OnPost: React.FC = () => {
                             </>
                         ) : (
                             <>
-                                <Comments id={id!} />
-                                <AddComment/>
+                                <Comments id={post._id!} />
+                                <AddComment postId={post._id}/>
                             </>
                         )}
                     </div>

@@ -26,11 +26,10 @@ export const loadSecciones = (queryParams: { [key: string]: any } = {}) => {
   return API.get(`/api/secciones/getsection${query ? `?${query}` : ''}`);
 };
 
-export const newComment = (queryParams: {[key: string]: any} = {}) => {
-  const query = new URLSearchParams(queryParams).toString();
-  return API.get(`/api/post/newcomment${query ? `?${query}` : ''}`);
+export const newComment = (formData: { content: string; userName: string; postId: string }) => {
+  return API.post('/api/posts/newcomment', formData);
 };
 
-export const getComment = (id: string) => {
-  return API.get(`/api/posts/getcomment${id}`);
+export const getComments = (id: string) => {
+  return API.get(`/api/posts/getcomments/${id}`);
 }

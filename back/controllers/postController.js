@@ -1,5 +1,6 @@
 const Post = require('../models/post');
 const Comment = require('../models/comment');
+const mongoose = require('mongoose');
 
 const createPost = async (req, res) => {
     const { title, content, seccion, userName } = req.body;
@@ -45,7 +46,7 @@ const getPostById = async (req, res) => {
 };
 
 const createComment = async (req, res) => {
-    const { content, userName } = req.body;
+    const { content, userName, postId } = req.body;
     const user = req.userId;
 
     if(!user){
@@ -53,25 +54,27 @@ const createComment = async (req, res) => {
     }
 
     try{
-        const comment = new Comment({ content, userName, user });
+        const comment = new Comment({ content, userName, user, postId });
         await comment.save();
 
-        res.status(201).json({ message: 'Post agregado existosamente', post });
+        res.status(201).json({ message: 'Post agregado existosamente', comment });
     }catch (err){
         console.error('Error al intentar crear el comentario: ', err.message);
         res.status(500).json({ error: 'Error al obtener el post' });
     }
 };
 
-const getComment = async (req, res) => {
+const getComments = async (req, res) => {
     try {
-        const comment = await Comment.findById(req.params.id);
-        if(!comment) return res.status(404).json({ error: 'Post no encontrado' });
-        res.status(200).json(comment);
+        const { id } = req.params;
+        const postId = new mongoose.Types.ObjectId(id);
+        const comments = await Comment.find({ postId });
+        if(!comments) return res.status(404).json({ error: 'Comentario no encontrado' });
+        res.status(200).json(comments);
     } catch (err) {
         console.error('Error al obtener los comentarios: ', err);
         res.status(500).json({ error: 'Error al obtener el comentario', details: err.message});
     }
 };
 
-module.exports = { createPost, getPosts, getPostById, createComment, getComment };
+module.exports = { createPost, getPosts, getPostById, createComment, getComments };
