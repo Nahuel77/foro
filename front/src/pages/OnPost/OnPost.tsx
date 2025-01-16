@@ -45,11 +45,11 @@ const OnPost: React.FC = () => {
             <Navbar />
             <div className='post-container'>
                 <h2 className='post-title'>{post.title}</h2>
-                <div className='post-content'>
+                <div className='post-header'>
                     <h3>autor: {post.userName}</h3>
                     <span>fecha: {fechaFormateada}</span>
-                    <div dangerouslySetInnerHTML={{ __html: sanitizedContent }} />
                 </div>
+                <div className='post-content' dangerouslySetInnerHTML={{ __html: sanitizedContent }} />
                 <div className='comment-container'>
                     <h3>comentarios: </h3>
                     <div>
@@ -60,7 +60,7 @@ const OnPost: React.FC = () => {
                         ) : (
                             <>
                                 <Comments id={post._id!} />
-                                <AddComment postId={post._id}/>
+                                <AddComment postId={post._id} />
                             </>
                         )}
                     </div>

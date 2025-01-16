@@ -17,6 +17,7 @@ const Register: React.FC = () => {
     const handleSubmit = async (e: { preventDefault: () => void; }) => {
         e.preventDefault();
         try {
+            // console.log(formData);
             const response = await register(formData);
             alert("Registro exitoso");
         } catch (err: any) {

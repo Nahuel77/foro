@@ -1,22 +1,46 @@
 .post-container{
     display: flex;
     flex-direction: column;
+    width: 100%;
     align-items: center;
 }
 
 .post-title{
-    padding: 2rem 0 1rem 0;
+    margin: 2rem;
+    padding: 1rem;
+    border-radius: 1rem;
     font-size: 1.5rem;
+    text-align: center;
+    background-color: var(--background-contrast);
+}
+
+.post-header{
+    display: flex;
+    width: 90%;
+}
+
+span{
+    padding: 0;
+    margin: 0;
+}
+
+h3{
+    margin: 0 3rem 0 1rem;
+    text-align: center;
 }
 
 .post-content{
     display: flex;
     flex-direction: column;
-    margin: 0 2rem;
+    margin: 1rem 1rem 3rem 1rem;
+    background-color: var(--background-contrast);
+    padding: 1rem;
+    border-radius: 1rem;
+    width: 90%;
 }
 
 .comment-container{
     display: flex;
     flex-direction: column;
-    width: 95%;
+    width: 90%;
 }

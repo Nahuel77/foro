@@ -12,7 +12,6 @@ interface PostProps {
 }
 
 const Post: React.FC<PostProps> = ({ id, title, content, userName, date }) => {
-    const sanitizedContent = DOMPurify.sanitize(content);
     const navigate = useNavigate();
 
     const handleNavigate = () => {

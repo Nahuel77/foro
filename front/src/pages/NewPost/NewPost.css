@@ -17,14 +17,18 @@ h2{
 
 .title-conteiner{
     padding-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: start;
 }
 
 .post-title{
     font-size: large;
     padding: 0 1rem;
+    background-color: var(--button-background-light) !important;
 }
 
 .title-input{
-    width: 90%;
+    width: 80%;
     padding: .5rem;
 }

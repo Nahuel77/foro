@@ -1,0 +1,22 @@
+.comment-header{
+    display: flex;
+    margin-top: 1rem;
+}
+
+h4{
+    margin: 0 3rem 0 1rem;
+}
+
+span{
+    margin: 0;
+    padding: 0;
+}
+
+.comment-content{
+    display: flex;
+    flex-direction: column;
+    margin: 1rem 1rem 3rem 1rem;
+    background-color: var(--background-contrast);
+    padding: 1rem;
+    border-radius: 1rem;
+}
