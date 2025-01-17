@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import './Board.css'
 import Post from "../Post/Post";
-import { loadPosts } from "../../api/auth";
+import { getPosts } from "../../api/auth";
 
 interface BoardProps {
     seccion: string;
@@ -12,7 +12,7 @@ const Board: React.FC<BoardProps> = ({ seccion }) => {
 
     const fetchPosts = async () => {
         try {
-            const response = await loadPosts({ seccion });
+            const response = await getPosts({ seccion });
             setPosts(response.data);
         } catch (err) {
             console.error('Error al cargar los posts: ', err);

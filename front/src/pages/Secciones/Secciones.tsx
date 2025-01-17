@@ -2,14 +2,14 @@ import React, { useEffect, useState } from "react";
 import './Secciones.css';
 import Navbar from "../../components/Navbar/Navbar";
 import Seccion from "../../components/Seccion/Seccion";
-import { loadSecciones } from "../../api/auth";
+import { getSections } from "../../api/auth";
 
 const Secciones: React.FC = () => {
     const [secciones, setSecciones] = useState<any[]>([]);
 
     const fetchSecciones = async () => {
         try {
-            const response = await loadSecciones({});
+            const response = await getSections({});
             setSecciones(response.data);
         } catch (err) {
             console.error('Error al cargar los posts: ', err);

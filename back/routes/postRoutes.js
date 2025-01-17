@@ -1,5 +1,5 @@
 const express = require('express');
-const { createPost, getPosts, getPostById, createComment, getComments } = require('../controllers/postController');
+const { createPost, getPosts, getPostById, createComment, getComments, getLatestPost } = require('../controllers/postController');
 const authMiddleware = require('../middlewares/authMiddleware');
 const sanitizeMiddleware = require('../middlewares/sanitizeMiddleware');
 
@@ -14,5 +14,7 @@ router.get('/:id', getPostById);
 router.post('/newcomment', authMiddleware, sanitizeMiddleware, createComment);
 
 router.get('/getcomments/:id', getComments);
+
+router.get('/getlatestposts/:section/:top', getLatestPost);
 
 module.exports = router;

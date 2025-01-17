@@ -27,7 +27,9 @@ const getPosts = async (req, res) => {
         if (seccion) {
             filter.seccion = seccion;
         }
-        const posts = await Post.find(filter);
+        const posts = await Post.find(filter)
+            .sort({createdAt: -1})
+            .exec();
         res.status(200).json(posts);
     } catch (err) {
         console.error('Error al intentar obtener el post: ', err);
@@ -68,7 +70,9 @@ const getComments = async (req, res) => {
     try {
         const { id } = req.params;
         const postId = new mongoose.Types.ObjectId(id);
-        const comments = await Comment.find({ postId });
+        const comments = await Comment.find({ postId })
+            .sort({date: -1})
+            .exec();
         if(!comments) return res.status(404).json({ error: 'Comentario no encontrado' });
         res.status(200).json(comments);
     } catch (err) {
@@ -77,4 +81,22 @@ const getComments = async (req, res) => {
     }
 };
 
-module.exports = { createPost, getPosts, getPostById, createComment, getComments };
+const getLatestPost = async (req, res) => {
+    try {
+        const { section, top } = req.params;
+        const filter = {};
+        if (section !== 'all') {
+            filter.seccion = section;
+        }
+        const limit = parseInt(top);
+        const posts = await Post.find(filter)
+            .sort({createdAt: -1})
+            .limit(limit);
+        res.status(200).json(posts);
+    } catch (err) {
+        console.error('Error al obtener ultimos posts: ', err);
+        res.status(500).json({error: 'Error al obtener ultimos posts', details: err.message});
+    }
+}
+
+module.exports = { createPost, getPosts, getPostById, createComment, getComments, getLatestPost };
