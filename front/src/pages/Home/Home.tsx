@@ -10,8 +10,8 @@ const Home: React.FC = () => {
         <>
             <Navbar />
             <div className="content">
-                <Board/>
-                <Board/>
+                <Board seccion="all"/>
+                <Board seccion="all"/>
             </div>
         </>
     )

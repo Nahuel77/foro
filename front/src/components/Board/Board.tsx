@@ -12,7 +12,7 @@ const Board: React.FC<BoardProps> = ({ seccion }) => {
 
     const fetchPosts = async () => {
         try {
-            const response = await getPosts({ seccion });
+            const response = await getPosts({ section: seccion, top: '0' });
             setPosts(response.data);
         } catch (err) {
             console.error('Error al cargar los posts: ', err);

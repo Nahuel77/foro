@@ -22,18 +22,19 @@ const createPost = async (req, res) => {
 
 const getPosts = async (req, res) => {
     try {
-        const { seccion } = req.query;
+        const { section, top } = req.params;
         const filter = {};
-        if (seccion) {
-            filter.seccion = seccion;
+        if (section !== 'all') {
+            filter.seccion = section;
         }
+        const limit = parseInt(top);
         const posts = await Post.find(filter)
             .sort({createdAt: -1})
-            .exec();
+            .limit(limit);
         res.status(200).json(posts);
     } catch (err) {
-        console.error('Error al intentar obtener el post: ', err);
-        res.status(500).json({ error: 'Error al obtener los posts', details: err.message });
+        console.error('Error al obtener ultimos posts: ', err);
+        res.status(500).json({error: 'Error al obtener ultimos posts', details: err.message});
     }
 }
 
@@ -81,22 +82,4 @@ const getComments = async (req, res) => {
     }
 };
 
-const getLatestPost = async (req, res) => {
-    try {
-        const { section, top } = req.params;
-        const filter = {};
-        if (section !== 'all') {
-            filter.seccion = section;
-        }
-        const limit = parseInt(top);
-        const posts = await Post.find(filter)
-            .sort({createdAt: -1})
-            .limit(limit);
-        res.status(200).json(posts);
-    } catch (err) {
-        console.error('Error al obtener ultimos posts: ', err);
-        res.status(500).json({error: 'Error al obtener ultimos posts', details: err.message});
-    }
-}
-
-module.exports = { createPost, getPosts, getPostById, createComment, getComments, getLatestPost };
+module.exports = { createPost, getPosts, getPostById, createComment, getComments };

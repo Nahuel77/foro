@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import './Seccion.css';
 import { useNavigate } from 'react-router-dom';
-import { getLatestPosts } from "../../api/auth";
+import { getPosts } from "../../api/auth";
 
 interface SeccionProps {
     title: string;
@@ -21,7 +21,7 @@ const Seccion: React.FC<SeccionProps> = ({ title, seccion, descripcion }) => {
 
     const fetchLatestPost = async () => {
         try {
-            const response = await getLatestPosts({ section: seccion, top: '1' });
+            const response = await getPosts({ section: seccion, top: '1' });
             if (response.data.length > 0) {
                 setLastPost(response.data[0]);
             } else {

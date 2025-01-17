@@ -12,9 +12,8 @@ export const newPost = (formData: { title: string; content: string; seccion: str
   return API.post('/api/posts/newpost', formData);
 };
 
-export const getPosts = (queryParams: { [key: string]: any } = {}) => {
-  const query = new URLSearchParams(queryParams).toString();
-  return API.get(`/api/posts/getposts${query ? `?${query}` : ''}`);
+export const getPosts = ({ section, top }: { section: string; top: string }) => {
+  return API.get(`/api/posts/getposts/${section}/${top}`);
 };
 
 export const getPostById = (id: string) => {
@@ -32,8 +31,4 @@ export const newComment = (formData: { content: string; userName: string; postId
 
 export const getComments = (id: string) => {
   return API.get(`/api/posts/getcomments/${id}`);
-}
-
-export const getLatestPosts = ({ section, top }: { section: string; top: string }) => {
-  return API.get(`/api/posts/getlatestposts/${section}/${top}`);
 }
