@@ -4,10 +4,11 @@ import { useNavigate } from "react-router-dom";
 
 interface SideBoardProps {
     seccion: string;
+    postsLength: number;
 }
 
 
-const SideBoard: React.FC<SideBoardProps> = ({ seccion }) => {
+const SideBoard: React.FC<SideBoardProps> = ({ seccion, postsLength }) => {
     const navigate = useNavigate();
 
     const handleNavigate = () => {
@@ -21,6 +22,9 @@ const SideBoard: React.FC<SideBoardProps> = ({ seccion }) => {
                 <div className="add-tema-content" onClick={handleNavigate}>
                     <img src="/icon/add-icon.svg" alt="nuevo post" className="add-post-icon" />
                     <span className="add-post-span">Agregar Tema</span>
+                </div>
+                <div>
+                    <span className="posts-length">Temas: {postsLength}</span>
                 </div>
             </div>
         </>

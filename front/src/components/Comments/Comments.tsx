@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { getComments } from '../../api/auth';
 import './Comments.css';
 import DOMPurify from "dompurify";
+import { useAuth } from '../../context/AuthContext';
 
 interface CommentProps {
     id: string;
@@ -9,10 +10,10 @@ interface CommentProps {
 
 const Comments: React.FC<CommentProps> = ({ id }) => {
     const [comments, setComments] = useState<any[]>([]);
+    const { userId } = useAuth();
 
     const fetchComments = async () => {
         try {
-            // console.log(id);
             const response = await getComments(id);
             setComments(response.data);
         } catch (err) {
@@ -32,10 +33,25 @@ const Comments: React.FC<CommentProps> = ({ id }) => {
                     return (
                         <div key={comment._id}>
                             <div className='comment-header'>
-                            <h4>{comment.userName}</h4>
-                            <span>{new Date(comment.date).toLocaleString()}</span>
+                                <h4>{comment.userName}</h4>
+                                <span>{new Date(comment.date).toLocaleString()}</span>
                             </div>
-                            <div className='comment-content' dangerouslySetInnerHTML={{ __html: sanitizedContent }}/>
+                            <div className='comment-body'>
+                                <div className='comment-content' dangerouslySetInnerHTML={{ __html: sanitizedContent }} />
+                                {userId !== null ? (
+                                    userId === comment.user ? (
+                                        <>
+                                            <button className='comment-button'>Borrar</button>
+                                            <button className='comment-button'>Editar</button>
+                                            <button className='comment-button'>Citar</button>
+                                        </>) : (
+                                        <>
+                                            <button className='comment-button'>Citar</button>
+                                        </>
+                                    )
+                                ) : (<>
+                                </>)}
+                            </div>
                         </div>);
                 })
             ) : (

@@ -18,9 +18,9 @@ const Login: React.FC = () => {
         e.preventDefault();
         try {
             const response = await loginAPI(formData);
-            const { token, userName } = response.data; //agregar userName
-            localStorage.setItem('token', token);
-            login('user', userName);
+            const { token, userName, userId } = response.data; //agregar userName
+            localStorage.setItem('token', token );
+            login('user', userName, userId);
             navigate('/');
         } catch (err: any) {
             setError(err.response?.data?.message || 'Error al iniciar sesión');

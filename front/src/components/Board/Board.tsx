@@ -7,9 +7,10 @@ interface BoardProps {
     seccion: string;
     title: string;
     content: string;
+    postsLengthCallBack: (length: number) => void;
 }
 
-const Board: React.FC<BoardProps> = ({ seccion, title, content }) => {
+const Board: React.FC<BoardProps> = ({ seccion, title, content, postsLengthCallBack }) => {
     const [posts, setPosts] = useState<any[]>([]);
 
     const fetchPosts = async () => {
@@ -17,6 +18,7 @@ const Board: React.FC<BoardProps> = ({ seccion, title, content }) => {
             try {
                 const response = await getPosts({ section: seccion, top: '0' });
                 setPosts(response.data);
+                postsLengthCallBack(response.data.length);
             } catch (err) {
                 console.error('Error al cargar los posts: ', err);
             }

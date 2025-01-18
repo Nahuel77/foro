@@ -27,7 +27,7 @@ const loginUser = async (req, res) => {
         if (!isMatch) return res.status(401).json({ error: 'Credenciales inválidas' });
 
         const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
-        res.status(200).json({ token, userName: user.userName });
+        res.status(200).json({ token, userName: user.userName, userId: user._id });
     } catch (error) {
         res.status(500).json({ error: 'Error al iniciar sesión' });
     }

@@ -12,11 +12,19 @@ span{
     padding: 0;
 }
 
+.comment-body{
+    background-color: var(--background-contrast);
+    border-radius: 1rem;
+    padding: 1rem;
+    margin: 1rem 0 4rem 0;
+}
+
 .comment-content{
     display: flex;
     flex-direction: column;
-    margin: 1rem 1rem 3rem 1rem;
-    background-color: var(--background-contrast);
-    padding: 1rem;
-    border-radius: 1rem;
+    margin: 1rem;
+}
+
+.comment-button{
+    margin: .5rem;
 }

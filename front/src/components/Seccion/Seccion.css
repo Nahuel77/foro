@@ -29,5 +29,8 @@
 .ultimo-post{
     display: flex;
     flex-direction: column;
-    margin: 1rem 4rem 1rem 0;
+    width: 100%;
+    margin: 1rem 0;
+    text-align: center;
+    align-items: center;
 }

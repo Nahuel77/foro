@@ -102,4 +102,33 @@ const getLatestComments = async (req, res) => {
     }
 };
 
-module.exports = { createPost, getPosts, getPostById, createComment, getComments, getLatestComments };
+const deleteContent = async (req, res) => {
+    const {content, id} = req.params;
+    console.log('post', content);
+    if (content === 'Post') {
+        try {
+            const deletedPost = await Post.findByIdAndDelete(id);
+            if (!deletedPost) {
+                return res.status(404).json({ message: 'Post no encontrado' });
+            }
+            res.status(202).json({ message: 'Post eliminado con exito' });
+        } catch (err) {
+            console.error('Error al borrar contenido. ', err);
+            res.status(500).json({ error: 'Error al borrar el post', details: err.message });
+        }
+    }
+    if (content === 'Comment') {
+        try {
+            const deletedComment = await Comment.findByIdAndDelete(id);
+            if (!deletedComment) {
+                return res.status(404).json({ message: 'Comentario no encontrado' });
+            }
+            res.status(202).json({ message: 'Comentario eliminado con exito' });
+        } catch (err) {
+            console.error('Error al borrar contenido. ', err);
+            res.status(500).json({ error: 'Error al borrar el comentario', details: err.message });
+        }
+    }
+}
+
+module.exports = { createPost, getPosts, getPostById, createComment, getComments, getLatestComments, deleteContent };

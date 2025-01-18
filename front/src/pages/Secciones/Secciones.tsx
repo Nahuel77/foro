@@ -37,7 +37,9 @@ const Secciones: React.FC = () => {
                             />
                         ))
                     ) : (
-                        <p className="no-post">No hay posts disponibles.</p>
+                        <div className="no-post">
+                            <p>No hay posts disponibles.</p>
+                        </div>
                     )}
                 </div>
             </div>

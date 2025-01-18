@@ -36,3 +36,7 @@ export const getComments = (id: string) => {
 export const getLatestComments = () => {
   return API.get(`/api/posts/getlatestcomments`);
 };
+
+export const deleteContent = ({ content, id}: { content: string, id: string}) => {
+  return API.post(`/api/posts/deletecontent/${content}/${id}`);
+}

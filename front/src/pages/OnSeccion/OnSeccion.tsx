@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import './OnSeccion.css'
 import Navbar from "../../components/Navbar/Navbar";
 import Board from "../../components/Board/Board";
@@ -10,6 +10,11 @@ const OnSeccion: React.FC = () => {
     const { isAuthenticated } = useAuth();
     const location = useLocation();
     const { seccion, title } = location.state || {};
+    const [ postsLength, setPostsLength] = useState<number>(0);
+
+    const handlePostsLength = (length: number) => {
+        setPostsLength(length);
+    }
 
     return (
         <>
@@ -19,12 +24,20 @@ const OnSeccion: React.FC = () => {
                 <div className="board-content">
                     {!isAuthenticated ? (
                         <>
-                            <Board seccion={seccion} title="Últimos Temas" content="post"/>
+                            <Board
+                            seccion={seccion}
+                            title="Últimos Temas"
+                            content="post"
+                            postsLengthCallBack={handlePostsLength} />
                         </>
                     ) : (
                         <>
-                            <SideBoard seccion={seccion} />
-                            <Board seccion={seccion} title="Últimos Temas" content="post"/>
+                            <SideBoard seccion={seccion} postsLength={postsLength} />
+                            <Board
+                            seccion={seccion}
+                            title="Últimos Temas"
+                            content="post"
+                            postsLengthCallBack={handlePostsLength}/>
                         </>
                     )}
                 </div>
