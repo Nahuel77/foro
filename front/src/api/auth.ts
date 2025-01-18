@@ -17,7 +17,7 @@ export const getPosts = ({ section, top }: { section: string; top: string }) => 
 };
 
 export const getPostById = (id: string) => {
-  return API.get(`/api/posts/${id}`);
+  return API.get(`/api/posts/getpostbyid/${id}`);
 };
 
 export const getSections = (queryParams: { [key: string]: any } = {}) => {
@@ -31,4 +31,8 @@ export const newComment = (formData: { content: string; userName: string; postId
 
 export const getComments = (id: string) => {
   return API.get(`/api/posts/getcomments/${id}`);
-}
+};
+
+export const getLatestComments = () => {
+  return API.get(`/api/posts/getlatestcomments`);
+};

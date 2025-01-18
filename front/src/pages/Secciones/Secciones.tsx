@@ -30,6 +30,7 @@ const Secciones: React.FC = () => {
                     {secciones.length > 0 ? (
                         secciones.map((seccion) => (
                             <Seccion
+                                key={seccion._id}
                                 title={seccion.title}
                                 seccion={seccion.seccion}
                                 descripcion={seccion.description}

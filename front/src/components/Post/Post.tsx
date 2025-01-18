@@ -1,17 +1,15 @@
 import React from "react";
 import './Post.css';
-import DOMPurify from "dompurify";
 import { useNavigate } from "react-router-dom";
 
 interface PostProps {
     id: string;
     title: string;
-    content: string;
     userName: string;
     date: string;
 }
 
-const Post: React.FC<PostProps> = ({ id, title, content, userName, date }) => {
+const Post: React.FC<PostProps> = ({ id, title, userName, date }) => {
     const navigate = useNavigate();
 
     const handleNavigate = () => {

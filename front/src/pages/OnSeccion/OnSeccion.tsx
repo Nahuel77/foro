@@ -19,12 +19,12 @@ const OnSeccion: React.FC = () => {
                 <div className="board-content">
                     {!isAuthenticated ? (
                         <>
-                            <Board seccion={seccion} />
+                            <Board seccion={seccion} title="Últimos Temas" content="post"/>
                         </>
                     ) : (
                         <>
                             <SideBoard seccion={seccion} />
-                            <Board seccion={seccion} />
+                            <Board seccion={seccion} title="Últimos Temas" content="post"/>
                         </>
                     )}
                 </div>
