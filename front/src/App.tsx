@@ -8,6 +8,7 @@ import { useAuth } from './context/AuthContext';
 import User from './pages/User/User';
 import Secciones from './pages/Secciones/Secciones';
 import NewPost from './pages/NewPost/NewPost';
+import EditPost from './pages/EditPost/EditPost';
 import OnPost from './pages/OnPost/OnPost';
 import OnSeccion from './pages/OnSeccion/OnSeccion';
 
@@ -29,6 +30,7 @@ const App: React.FC = () => {
                         <Route path="/usuario" element={<User />} />
                         <Route path="/:seccion/nuevopost" element={<NewPost />} />
                         <Route path="*" element={<Navigate to="/" />} />
+                        <Route path="/editpost" element={<EditPost />} />
                     </>
                 )}
                 <Route path="/secciones" element={<Secciones />} />

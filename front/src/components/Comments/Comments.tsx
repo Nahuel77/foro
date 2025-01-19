@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react';
-import { getComments } from '../../api/auth';
+import { deleteContent, getComments } from '../../api/auth';
 import './Comments.css';
 import DOMPurify from "dompurify";
 import { useAuth } from '../../context/AuthContext';
+import AddComment from '../AddComment/AddComment';
 
 interface CommentProps {
     id: string;
@@ -10,7 +11,7 @@ interface CommentProps {
 
 const Comments: React.FC<CommentProps> = ({ id }) => {
     const [comments, setComments] = useState<any[]>([]);
-    const { userId } = useAuth();
+    const { isAuthenticated, userId } = useAuth();
 
     const fetchComments = async () => {
         try {
@@ -24,6 +25,17 @@ const Comments: React.FC<CommentProps> = ({ id }) => {
     useEffect(() => {
         fetchComments();
     }, [id]);
+
+    const handleDelete = async (commentId: string) => {
+        if (window.confirm('Confirme que desea eliminar el comentario')) {
+            try {
+                const response = deleteContent({ content: 'Comment', id: commentId });
+                setComments((prevComments) => prevComments.filter((comment) => comment._id !== commentId));
+            } catch (err) {
+                console.error('Error al intentar borrar el comentario: ', err);
+            }
+        }
+    }
 
     return (
         <>
@@ -41,7 +53,7 @@ const Comments: React.FC<CommentProps> = ({ id }) => {
                                 {userId !== null ? (
                                     userId === comment.user ? (
                                         <>
-                                            <button className='comment-button'>Borrar</button>
+                                            <button onClick={() => { handleDelete(comment._id) }} className='comment-button'>Borrar</button>
                                             <button className='comment-button'>Editar</button>
                                             <button className='comment-button'>Citar</button>
                                         </>) : (
@@ -56,6 +68,11 @@ const Comments: React.FC<CommentProps> = ({ id }) => {
                 })
             ) : (
                 <p className="no-post">No hay comentarios disponibles.</p>
+            )}
+            {!isAuthenticated ? (
+                <></>
+            ) : (
+                <AddComment postId={id} commentRefreshCallBack={fetchComments}/>
             )}
         </>
     )

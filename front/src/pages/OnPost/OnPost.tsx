@@ -5,13 +5,11 @@ import { useEffect, useState } from 'react';
 import { deleteContent, getPostById } from '../../api/auth';
 import DOMPurify from "dompurify";
 import { useAuth } from '../../context/AuthContext';
-import AddComment from '../../components/AddComment/AddComment';
 import Comments from '../../components/Comments/Comments';
 
 const OnPost: React.FC = () => {
     const { id } = useParams<{ id: string }>();
     const [post, setPost] = useState<any | null>(null);
-    const { isAuthenticated } = useAuth();
     const { userId } = useAuth();
     const navigate = useNavigate();
 
@@ -43,14 +41,20 @@ const OnPost: React.FC = () => {
     })}` : '';
 
     const handleDelete = async () => {
-        try {
-            const response = deleteContent({ content: 'Post', id: post._id });
-            alert('Post eliminado');
-            navigate('/');
-        } catch (err: any) {
-            console.error('Error al crear el post: ', err.response?.data || err.message);
-            alert('Error al intentar crear el post');
+        if (window.confirm('Confirme que desea eliminar el post')) {
+            try {
+                const response = deleteContent({ content: 'Post', id: post._id });
+                alert('Post eliminado');
+                navigate('/');
+            } catch (err: any) {
+                console.error('Error al crear el post: ', err.response?.data || err.message);
+                alert('Error al intentar crear el post');
+            }
         }
+    }
+
+    const handleEdit = () => {
+        navigate('/editpost', { state: { id: post._id, titleUpdate: post.title, contentUpdate: sanitizedContent } });
     }
 
     return (
@@ -68,30 +72,23 @@ const OnPost: React.FC = () => {
                         userId === post.user ? (
                             <>
                                 <button onClick={handleDelete} className='comment-button'>Borrar</button>
-                                <button className='comment-button'>Editar</button>
+                                <button onClick={handleEdit} className='comment-button'>Editar</button>
                                 <button className='comment-button'>Citar</button>
                             </>) : (
                             <>
                                 <button className='comment-button'>Citar</button>
                             </>
                         )
-                    ) : (<>
-                    </>)}
+                    ) : (
+                        <>
+                        </>
+                    )}
                 </div>
 
                 <div className='comment-container'>
                     <h3>comentarios: </h3>
                     <div>
-                        {!isAuthenticated ? (
-                            <>
-                                <Comments id={id!} />
-                            </>
-                        ) : (
-                            <>
-                                <Comments id={post._id!} />
-                                <AddComment postId={post._id} />
-                            </>
-                        )}
+                        <Comments id={id!} />
                     </div>
                 </div>
             </div>

@@ -18,7 +18,9 @@ const Board: React.FC<BoardProps> = ({ seccion, title, content, postsLengthCallB
             try {
                 const response = await getPosts({ section: seccion, top: '0' });
                 setPosts(response.data);
-                postsLengthCallBack(response.data.length);
+                if (postsLengthCallBack && typeof postsLengthCallBack === "function") {
+                    postsLengthCallBack(response.data.length);
+                }
             } catch (err) {
                 console.error('Error al cargar los posts: ', err);
             }

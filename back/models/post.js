@@ -9,6 +9,7 @@ const PostSchema = new mongoose.Schema({
     content: { type: String, required: true },
     image: { type: Buffer },
     createdAt: { type: Date, default: Date.now },
+    editedAt: { type: Date, required: false},
 });
 
 module.exports = mongoose.model('Post', PostSchema);

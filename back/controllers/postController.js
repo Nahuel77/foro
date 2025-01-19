@@ -103,8 +103,7 @@ const getLatestComments = async (req, res) => {
 };
 
 const deleteContent = async (req, res) => {
-    const {content, id} = req.params;
-    console.log('post', content);
+    const { content, id } = req.params;
     if (content === 'Post') {
         try {
             const deletedPost = await Post.findByIdAndDelete(id);
@@ -131,4 +130,33 @@ const deleteContent = async (req, res) => {
     }
 }
 
-module.exports = { createPost, getPosts, getPostById, createComment, getComments, getLatestComments, deleteContent };
+const updateContent = async (req, res) => {
+    const { contentType, id, update } = req.body;
+    const user = req.userId;
+
+    if (!user) {
+        return res.status(400).json({ error: 'No se encontró el usuario asociado al token' });
+    }
+
+    if (contentType === 'Post') {
+        try {
+            const updatePost = await Post.findByIdAndUpdate(id, { title: update.title, content: update.content });
+
+            res.status(202).json({ message: 'Post actualizado con exito' });
+        } catch (err) {
+            console.error('Error al actualizar contenido. ', err);
+            res.status(500).json({ error: 'Error al actualizar el post', details: err.message });
+        }
+    }
+    if (contentType === 'Comment') {
+        try {
+            const updateComment = await Comment.findByIdAndUpdate(id, {content: update.content});
+            res.status(202).json({ message: 'Comentario actualizado con exito' });
+        } catch (err) {
+            console.error('Error al actualizar contenido. ', err);
+            res.status(500).json({ error: 'Error al actualizar el comentario', details: err.message });
+        }
+    }
+}
+
+module.exports = { createPost, getPosts, getPostById, createComment, getComments, getLatestComments, deleteContent, updateContent };

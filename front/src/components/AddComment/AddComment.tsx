@@ -2,17 +2,16 @@ import { useState } from 'react';
 import { useAuth } from '../../context/AuthContext';
 import Redactor from '../Redactor/Redactor';
 import './AddComment.css';
-import { useNavigate } from 'react-router-dom';
 import { newComment } from '../../api/auth';
 
 interface AddCommentProps{
     postId: string;
+    commentRefreshCallBack: ()=> void;
 }
 
-const AddComment: React.FC<AddCommentProps> = ({ postId }) => {
+const AddComment: React.FC<AddCommentProps> = ({ postId, commentRefreshCallBack }) => {
     const [content, setContent] = useState('');
     const { userName } = useAuth();
-    const navigate = useNavigate();
 
     const handleSavePost = async () => {
 
@@ -23,8 +22,7 @@ const AddComment: React.FC<AddCommentProps> = ({ postId }) => {
 
         try {
             const response = await newComment({ content, userName, postId });
-            alert('Comentario agregado');
-            navigate('/');
+            commentRefreshCallBack();
         } catch (err: any) {
             console.error('Error al crear el comentario: ', err.response?.data || err.message);
             alert('Error al intentar crear el comentario');

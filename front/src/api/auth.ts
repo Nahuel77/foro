@@ -39,4 +39,8 @@ export const getLatestComments = () => {
 
 export const deleteContent = ({ content, id}: { content: string, id: string}) => {
   return API.post(`/api/posts/deletecontent/${content}/${id}`);
-}
+};
+
+export const updateContent = (formData: { contentType: string, id: string, update: {content: string, title: string}})=>{
+  return API.post('/api/posts/updatecontent', formData);
+};
