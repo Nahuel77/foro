@@ -17,7 +17,8 @@ const Redactor: React.FC<RedactorProps> = ({ content, setContent, onSave}) => {
                 <div className="editor-container">
                     <ReactQuill
                         theme="snow"
-                        value={content}
+                        // value={content}
+                        defaultValue={content}
                         onChange={setContent}
                         className="text-form"
                         id="text"

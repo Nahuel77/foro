@@ -31,7 +31,8 @@ const EditPost: React.FC = () => {
                         <input
                             type="text"
                             className="title-input"
-                            value={titleUpdate}
+                            defaultValue={titleUpdate}
+                            // value={titleUpdate}
                             onChange={(e) => setTitle(e.target.value)} />
                     </div>
                     <Redactor content={contentUpdate} setContent={setContent} onSave={handleSavePost} />
