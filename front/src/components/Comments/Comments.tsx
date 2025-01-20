@@ -1,9 +1,10 @@
 import { useEffect, useState } from 'react';
-import { deleteContent, getComments } from '../../api/auth';
+import { deleteContent, getComments, updateContent } from '../../api/auth';
 import './Comments.css';
 import DOMPurify from "dompurify";
 import { useAuth } from '../../context/AuthContext';
 import AddComment from '../AddComment/AddComment';
+import Redactor from '../Redactor/Redactor';
 
 interface CommentProps {
     id: string;
@@ -11,7 +12,10 @@ interface CommentProps {
 
 const Comments: React.FC<CommentProps> = ({ id }) => {
     const [comments, setComments] = useState<any[]>([]);
+    const [contentUpdate, setContentUpdate] = useState('');
     const { isAuthenticated, userId } = useAuth();
+    const [onEdit, setOnEdit] = useState<Boolean>(false);
+    const [idOnEdit, setIdOnEdit] = useState<string>('');
 
     const fetchComments = async () => {
         try {
@@ -37,6 +41,25 @@ const Comments: React.FC<CommentProps> = ({ id }) => {
         }
     }
 
+    const handleEdit = (commentId: string) => {
+        setOnEdit(true);
+        setIdOnEdit(commentId);
+    }
+
+    const saveEdit = async () => {
+        try {
+            const response = updateContent({contentType: 'Comment', id: idOnEdit, update: {content: contentUpdate, title: ''}});
+            fetchComments();
+            setOnEdit(false);
+        } catch (err) {
+            console.error('Error al intentar editar el comentario: ', err);
+        }
+    }
+
+    const handleCancel = () => {
+        setOnEdit(false);
+    }
+
     return (
         <>
             {comments.length > 0 ? (
@@ -53,9 +76,14 @@ const Comments: React.FC<CommentProps> = ({ id }) => {
                                 {userId !== null ? (
                                     userId === comment.user ? (
                                         <>
-                                            <button onClick={() => { handleDelete(comment._id) }} className='comment-button'>Borrar</button>
-                                            <button className='comment-button'>Editar</button>
-                                            <button className='comment-button'>Citar</button>
+                                            {onEdit !== true ? (<>
+                                                <button onClick={() => { handleDelete(comment._id) }} className='comment-button'>Borrar</button>
+                                                <button onClick={() => { handleEdit(comment._id) }} className='comment-button'>Editar</button>
+                                                <button className='comment-button'>Citar</button>
+                                            </>) : (<>
+                                                <Redactor content={sanitizedContent} setContent={setContentUpdate} onSave={saveEdit} state='edit' onCancel={handleCancel}/>
+                                            </>)
+                                            }
                                         </>) : (
                                         <>
                                             <button className='comment-button'>Citar</button>
@@ -72,7 +100,7 @@ const Comments: React.FC<CommentProps> = ({ id }) => {
             {!isAuthenticated ? (
                 <></>
             ) : (
-                <AddComment postId={id} commentRefreshCallBack={fetchComments}/>
+                <AddComment postId={id} commentRefreshCallBack={fetchComments} />
             )}
         </>
     )

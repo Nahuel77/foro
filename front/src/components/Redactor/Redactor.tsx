@@ -1,15 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Redactor.css";
 import ReactQuill from "react-quill";
 import 'react-quill/dist/quill.snow.css';
 
-interface RedactorProps{
+interface RedactorProps {
     content: string;
     setContent: (value: string) => void;
     onSave: () => void;
+    onCancel?: () => void;
+    state?: string;
 }
 
-const Redactor: React.FC<RedactorProps> = ({ content, setContent, onSave}) => {
+const Redactor: React.FC<RedactorProps> = ({ content, setContent, onSave, state, onCancel }) => {
 
     return (
         <>
@@ -25,10 +27,18 @@ const Redactor: React.FC<RedactorProps> = ({ content, setContent, onSave}) => {
                     />
                 </div>
                 <div className="btn-editor">
-                    <button className="ver">Ver</button>
-                    <button className="agregar" onClick={onSave}>Agregar</button>
-                </div>
-            </div>
+                    {state === 'edit' ? (
+                        <>
+                            <button onClick={onCancel} className="ver">Cancelar</button>
+                        </>
+                    ) : (
+                        <>
+                            <button className="ver">Ver</button>
+                        </>
+                    )}
+                    <button className="agregar" onClick={onSave}>Guardar</button>
+                </div >
+            </div >
         </>
     );
 };
