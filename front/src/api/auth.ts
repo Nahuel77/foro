@@ -44,3 +44,7 @@ export const deleteContent = ({ content, id}: { content: string, id: string}) =>
 export const updateContent = (formData: { contentType: string, id: string, update: {content: string, title: string}})=>{
   return API.post('/api/posts/updatecontent', formData);
 };
+
+export const passwordChange = (formData: {pass: string, newpass: string}) => {
+  return API.post('/api/auth/changepassword', formData);
+}

@@ -18,12 +18,20 @@ const Login: React.FC = () => {
         e.preventDefault();
         try {
             const response = await loginAPI(formData);
-            const { token, userName, userId } = response.data; //agregar userName
-            localStorage.setItem('token', token );
-            login('user', userName, userId);
-            navigate('/');
+            if (response.status === 200) {
+                const { token, userName, userId } = response.data;
+                localStorage.setItem('token', token);
+                login('user', userName, userId);
+                navigate('/');
+            }
         } catch (err: any) {
-            setError(err.response?.data?.message || 'Error al iniciar sesión');
+            if (err.response.status === 404) {
+                setError(err.response?.data?.message || 'Usuario no encontrado');
+            } else if (err.response.status === 401) {
+                setError(err.response?.data?.message || 'Contraseña incorrecta');
+            } else {
+                alert('Error inesperado al intentar logear');
+            }
         }
     };
 
@@ -39,7 +47,7 @@ const Login: React.FC = () => {
                         value={formData.email}
                         className="log-input" />
                     <input name="password"
-                        type="text"
+                        type="password"
                         placeholder="Contraseña"
                         onChange={handleChange}
                         value={formData.password}

@@ -43,7 +43,7 @@ const Register: React.FC = () => {
                         onChange={handleChange}
                         className="reg-input" />
                     <input name="password"
-                        type="text"
+                        type="password"
                         placeholder="Contraseña"
                         onChange={handleChange}
                         value={formData.password}
