@@ -104,6 +104,7 @@ const getLatestComments = async (req, res) => {
 
 const deleteContent = async (req, res) => {
     const { content, id } = req.params;
+    
     if (content === 'Post') {
         try {
             const deletedPost = await Post.findByIdAndDelete(id);
@@ -116,6 +117,7 @@ const deleteContent = async (req, res) => {
             res.status(500).json({ error: 'Error al borrar el post', details: err.message });
         }
     }
+
     if (content === 'Comment') {
         try {
             const deletedComment = await Comment.findByIdAndDelete(id);
@@ -128,6 +130,7 @@ const deleteContent = async (req, res) => {
             res.status(500).json({ error: 'Error al borrar el comentario', details: err.message });
         }
     }
+
 }
 
 const updateContent = async (req, res) => {

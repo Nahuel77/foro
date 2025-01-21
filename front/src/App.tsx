@@ -11,6 +11,7 @@ import NewPost from './pages/NewPost/NewPost';
 import EditPost from './pages/EditPost/EditPost';
 import OnPost from './pages/OnPost/OnPost';
 import OnSeccion from './pages/OnSeccion/OnSeccion';
+import Miscellaneous from './pages/Miscellaneous/Miscellaneous';
 
 const App: React.FC = () => {
     const { isAuthenticated } = useAuth();
@@ -39,7 +40,7 @@ const App: React.FC = () => {
                 <Route path="/consultas" element={<OnSeccion />} />
                 <Route path="/eventos" element={<OnSeccion />} />
                 <Route path="/post/:id" element={<OnPost />} />
-                <Route path="/ultimoscomentarios" element={<OnPost />} />
+                <Route path="/ultimoscomentarios" element={<Miscellaneous />} />
             </Routes>
         </>
     );

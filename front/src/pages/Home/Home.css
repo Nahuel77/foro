@@ -2,3 +2,31 @@
     display: flex;
     padding: 1rem;
 }
+
+.welcome-container {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    margin: 20px;
+    padding: 20px;
+    width: 90%;
+    border: 1px solid var(--button-text-light);
+    border-radius: 8px;
+    text-align: center;
+    justify-self: center;
+}
+.welcome-container h1 {
+    font-size: 24px;
+}
+.welcome-container ul,
+.welcome-container ol {
+    margin-left: 20px;
+    justify-self: center;
+}
+.welcome-container li {
+    text-align: start;
+    margin-bottom: 8px;
+}
+.welcome-container h2 {
+    font-size: 20px;
+    margin-top: 20px;
+}

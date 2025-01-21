@@ -7,12 +7,13 @@ interface BoardProps {
     seccion: string;
     title: string;
     content: string;
-    postsLengthCallBack: (length: number) => void;
+    postsLengthCallBack?: (length: number) => void;
+    showContent: boolean;
 }
 
-const Board: React.FC<BoardProps> = ({ seccion, title, content, postsLengthCallBack }) => {
+const Board: React.FC<BoardProps> = ({ seccion, title, content, postsLengthCallBack, showContent }) => {
     const [posts, setPosts] = useState<any[]>([]);
-
+    console.log(showContent);
     const fetchPosts = async () => {
         if (content === 'post') {
             try {
@@ -56,13 +57,28 @@ const Board: React.FC<BoardProps> = ({ seccion, title, content, postsLengthCallB
                                     date={post.createdAt}
                                 />
                             ) : (
-                                <Post
-                                    key={post._id}
-                                    id={post.postId._id}
-                                    title={post.postId.title}
-                                    userName={post.userName}
-                                    date={post.date}
-                                />
+                                showContent ? (
+                                    <>
+                                        <Post
+                                            key={post._id}
+                                            id={post.postId._id}
+                                            title={post.postId.title}
+                                            userName={post.userName}
+                                            date={post.date}
+                                            content={post.content}
+                                        />
+                                    </>
+                                ) : (
+                                    <>
+                                        <Post
+                                            key={post._id}
+                                            id={post.postId._id}
+                                            title={post.postId.title}
+                                            userName={post.userName}
+                                            date={post.date}
+                                        />
+                                    </>
+                                )
                             ))
                     ) : (
                         <p className="no-post">Nada disponible aún.</p>

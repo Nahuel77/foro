@@ -3,9 +3,9 @@
     flex-direction: column;
 }
 
-.head{
+.container{
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     align-items: center;
     /* justify-content: center; */
     align-content: center;
@@ -23,7 +23,7 @@
     margin: .5rem 1rem;
 }
 
-.head:hover{
+.container:hover{
     cursor: pointer;
     color: #535bf2;
     background-color: var(--background-contrast);
@@ -33,6 +33,7 @@
 .post-content{
     display: flex;
     margin: 0rem 1rem;
+    text-align: start;
 }
 
 .text-content{

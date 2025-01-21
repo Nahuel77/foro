@@ -28,7 +28,8 @@ const OnSeccion: React.FC = () => {
                             seccion={seccion}
                             title="Últimos Temas"
                             content="post"
-                            postsLengthCallBack={handlePostsLength} />
+                            postsLengthCallBack={handlePostsLength}
+                            showContent={false} />
                         </>
                     ) : (
                         <>
@@ -37,7 +38,8 @@ const OnSeccion: React.FC = () => {
                             seccion={seccion}
                             title="Últimos Temas"
                             content="post"
-                            postsLengthCallBack={handlePostsLength}/>
+                            postsLengthCallBack={handlePostsLength}
+                            showContent={false} />
                         </>
                     )}
                 </div>
