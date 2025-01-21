@@ -1,12 +1,18 @@
 import React from "react";
 import { useAuth } from "../../context/AuthContext";
 import { useTheme } from "../../context/ThemeContext";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./Header.css";
 
 const Header: React.FC = () => {
     const { isAuthenticated, userRole, logout } = useAuth();
     const { theme, toggleTheme } = useTheme();
+    const navigate = useNavigate();
+    
+    const handleLogout = () =>{
+        logout();
+        navigate('/');
+    }
 
     return (
         <nav>
@@ -34,7 +40,7 @@ const Header: React.FC = () => {
                         <Link to="/usuario" className="navbar-btn">
                             Mi Perfil
                         </Link>
-                        <button onClick={logout} className="navbar-btn">
+                        <button onClick={handleLogout} className="navbar-btn">
                             Logout
                         </button>
                     </>

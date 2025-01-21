@@ -38,7 +38,8 @@ const App: React.FC = () => {
                 <Route path="/recursos" element={<OnSeccion />} />
                 <Route path="/consultas" element={<OnSeccion />} />
                 <Route path="/eventos" element={<OnSeccion />} />
-                <Route path="/post/:id" element={<OnPost />} />  
+                <Route path="/post/:id" element={<OnPost />} />
+                <Route path="/ultimoscomentarios" element={<OnPost />} />
             </Routes>
         </>
     );

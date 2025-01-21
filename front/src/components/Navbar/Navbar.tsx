@@ -8,7 +8,7 @@ const Navbar: React.FC = () => {
         <>
             <nav className="bar">
                 <Link to="/secciones" className="board-btn">Secciones</Link>
-                <Link to="" className="board-btn">Últimos Comentarios</Link>
+                <Link to="ultimoscomentarios" className="board-btn">Últimos Comentarios</Link>
                 <Link to="" className="board-btn">Más visto</Link>
                 <div className="search-bar">
                     <input type="text" />

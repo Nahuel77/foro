@@ -5,10 +5,10 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { updateContent } from "../../api/auth";
 
 const EditPost: React.FC = () => {
-    const [title, setTitle] = useState('');
     const [content, setContent] = useState('');
     const location = useLocation();
     const { id, titleUpdate, contentUpdate } = location.state || {};
+    const [title, setTitle] = useState(titleUpdate);
     const navigate = useNavigate();
 
     const handleSavePost = async ()=>{
