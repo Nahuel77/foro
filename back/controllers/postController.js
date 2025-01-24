@@ -1,8 +1,8 @@
-const Post = require('../models/post');
-const Comment = require('../models/comment');
-const mongoose = require('mongoose');
+import Post from '../models/post.js';
+import Comment from '../models/comment.js';
+import mongoose from 'mongoose';
 
-const createPost = async (req, res) => {
+export const createPost = async (req, res) => {
     const { title, content, seccion, userName } = req.body;
     const user = req.userId;
 
@@ -20,7 +20,7 @@ const createPost = async (req, res) => {
     }
 };
 
-const getPosts = async (req, res) => {
+export const getPosts = async (req, res) => {
     try {
         const { section, top } = req.params;
         const filter = {};
@@ -38,7 +38,7 @@ const getPosts = async (req, res) => {
     }
 }
 
-const getPostById = async (req, res) => {
+export const getPostById = async (req, res) => {
     try {
         const post = await Post.findById(req.params.id);
         if (!post) return res.status(404).json({ error: 'Post no encontrado' });
@@ -48,7 +48,7 @@ const getPostById = async (req, res) => {
     }
 };
 
-const createComment = async (req, res) => {
+export const createComment = async (req, res) => {
     const { content, userName, postId } = req.body;
     const user = req.userId;
 
@@ -67,7 +67,7 @@ const createComment = async (req, res) => {
     }
 };
 
-const getComments = async (req, res) => {
+export const getComments = async (req, res) => {
     try {
         const { id } = req.params;
         const postId = new mongoose.Types.ObjectId(id);
@@ -82,7 +82,7 @@ const getComments = async (req, res) => {
     }
 };
 
-const getLatestComments = async (req, res) => {
+export const getLatestComments = async (req, res) => {
     try {
         const comments = await Comment.find()
             .sort({ date: -1 })
@@ -102,7 +102,7 @@ const getLatestComments = async (req, res) => {
     }
 };
 
-const deleteContent = async (req, res) => {
+export const deleteContent = async (req, res) => {
     const { content, id } = req.params;
     
     if (content === 'Post') {
@@ -133,7 +133,7 @@ const deleteContent = async (req, res) => {
 
 }
 
-const updateContent = async (req, res) => {
+export const updateContent = async (req, res) => {
     const { contentType, id, update } = req.body;
     const user = req.userId;
 
@@ -161,5 +161,3 @@ const updateContent = async (req, res) => {
         }
     }
 }
-
-module.exports = { createPost, getPosts, getPostById, createComment, getComments, getLatestComments, deleteContent, updateContent };

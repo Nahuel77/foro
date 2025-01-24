@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import './User.css';
 import { useAuth } from "../../context/AuthContext";
 import { passwordChange, uploadpic } from "../../api/auth";
@@ -14,6 +14,17 @@ const User: React.FC = () => {
         newpass: '',
         repeatpass: '',
     });
+
+    useEffect(()=>{
+        if(user.avatar !== null){
+            // const imageUrl = URL.createObjectURL(user.avatar);
+            // setProfileImage(imageUrl);
+            console.log('Habemus avatar');
+        }else{
+            console.log('No llego nada');
+            setProfileImage("/icon/user.png");
+        }
+    }, []);
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -62,11 +73,13 @@ const User: React.FC = () => {
             const response = await uploadpic({ pic: file });
             if (response.status === 200) {
                 const imageUrl = URL.createObjectURL(file);
-                localStorage.setItem("userProfileImage", imageUrl);
                 setProfileImage(imageUrl);
                 setUploadStatus("Archivo subido con éxito 🎉");
+            } else {
+                setProfileImage("/icon/user.png");
             }
         } catch (err: any) {
+            setProfileImage("/icon/user.png");
             console.error('Error al intentar subir el archivo: ', err.message);
             setUploadStatus("Error al subir el archivo ❌");
         }
@@ -79,11 +92,17 @@ const User: React.FC = () => {
                 <div className="panel-content">
 
                     <div className="panel-foto">
-                        <img src={profileImage} alt="user" className="user-img" />
+                        <img
+                            src={profileImage}
+                            alt="user"
+                            className="user-img"
+                            onError={() => { setProfileImage("/icon/user.png") }}
+                        />
                         <div className="boton-foto">
                             <span className="head-span">Foto de perfil</span>
                             <label htmlFor="file-upload" className="pic-upload-label">Cargar</label>
                             <input id="file-upload" type="file" onChange={handlePicUpload} accept="image/*" />
+                            <span>{uploadStatus}</span>
                         </div>
                     </div>
 

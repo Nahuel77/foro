@@ -19,9 +19,10 @@ const Login: React.FC = () => {
         try {
             const response = await loginAPI(formData);
             if (response.status === 200) {
-                const { token, userName, userId } = response.data;
+                const { token, userName, userId, avatar } = response.data;
+                console.log(avatar);
                 localStorage.setItem('token', token);
-                login('user', userName, userId);
+                login('user', userName, userId, avatar);
                 navigate('/');
             }
         } catch (err: any) {

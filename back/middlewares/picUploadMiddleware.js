@@ -1,4 +1,4 @@
-const multer = require("multer");
+import multer from 'multer';
 
 const storage = multer.memoryStorage();
 const upload = multer({ storage });
@@ -13,4 +13,4 @@ const uploadPicture = (req, res, next) => {
     });
 };
 
-module.exports = uploadPicture;
+export default uploadPicture;

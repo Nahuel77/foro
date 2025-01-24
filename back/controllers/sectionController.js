@@ -1,6 +1,6 @@
-const Seccion = require('../models/seccion');
+import Seccion from '../models/seccion.js';
 
-const getSection = async (req, res) => {
+export const getSection = async (req, res) => {
     try {
         const { title, seccion, description } = req.body;
         const secciones = await Seccion.find({});
@@ -10,5 +10,3 @@ const getSection = async (req, res) => {
         res.status(500).json({ error: 'Error al obtener secciones: ', details: err.message });
     }
 }
-
-module.exports = { getSection };

@@ -1,5 +1,4 @@
-const mongoose = require('mongoose');
-const bcrypt = require('bcryptjs');
+import mongoose from 'mongoose';
 
 const PostSchema = new mongoose.Schema({
     title: { type: String, required: true },
@@ -12,4 +11,4 @@ const PostSchema = new mongoose.Schema({
     editedAt: { type: Date, required: false},
 });
 
-module.exports = mongoose.model('Post', PostSchema);
+export default mongoose.model('Post', PostSchema);

@@ -1,5 +1,5 @@
-const DOMPurify =  require('dompurify');
-const { JSDOM } = require('jsdom');
+import DOMPurify from 'dompurify';
+import {JSDOM} from 'jsdom';
 
 const window = new JSDOM('').window;
 const purify = DOMPurify(window);
@@ -17,4 +17,4 @@ const sanitizeMiddleware = ( req, res, next ) => {
     next();
 };
 
-module.exports = sanitizeMiddleware;
+export default sanitizeMiddleware;

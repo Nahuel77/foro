@@ -5,7 +5,8 @@ interface AuthContextType {
     userRole: 'admin' | 'user' | null;
     userName: string | null;
     userId: string | null;
-    login: (role: 'admin' | 'user', userName: string, userId: string )=>void;
+    avatar: File | null;
+    login: (role: 'admin' | 'user', userName: string, userId: string, avatar: File )=>void;
     logout: ()=>void;
 }
 
@@ -16,6 +17,7 @@ export const AuthProvider: React.FC<{ children: ReactNode}>=({children})=>{
     const [userRole, setUserRole] = useState<'admin'|'user'|null>(null);
     const [userName, setUserName] = useState<string | null>(null);
     const [userId, setUserId] = useState<string | null>(null);
+    const [avatar, setAvatar] = useState<File | null>(null);
 
     useEffect(()=>{
         const token = localStorage.getItem('token');
@@ -28,11 +30,12 @@ export const AuthProvider: React.FC<{ children: ReactNode}>=({children})=>{
         }
     }, []);
     
-    const login = (role: 'admin' | 'user', userName: string, userId: string )=>{
+    const login = (role: 'admin' | 'user', userName: string, userId: string, avatar: File )=>{
         setIsAuthenticated(true);
         setUserRole(role);
         setUserName(userName);
         setUserId(userId);
+        setAvatar(avatar);
     };
     
     const logout=()=>{
@@ -40,11 +43,12 @@ export const AuthProvider: React.FC<{ children: ReactNode}>=({children})=>{
         setUserRole(null);
         setUserName(null);
         setUserId(null);
+        setAvatar(null);
         localStorage.removeItem('token');
     };
 
     return(
-        <AuthContext.Provider value={{ isAuthenticated, userRole, userName, login, logout, userId }}>
+        <AuthContext.Provider value={{ isAuthenticated, userRole, userName, login, logout, userId, avatar }}>
             {children}
         </AuthContext.Provider>
     );

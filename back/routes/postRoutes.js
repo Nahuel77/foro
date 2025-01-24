@@ -1,7 +1,7 @@
-const express = require('express');
-const { createPost, getPosts, getPostById, createComment, getComments, getLatestComments, deleteContent, updateContent } = require('../controllers/postController');
-const authMiddleware = require('../middlewares/authMiddleware');
-const sanitizeMiddleware = require('../middlewares/sanitizeMiddleware');
+import express from 'express';
+import { createPost, getPosts, getPostById, createComment, getComments, getLatestComments, deleteContent, updateContent } from '../controllers/postController.js';
+import authMiddleware from '../middlewares/authMiddleware.js';
+import sanitizeMiddleware from '../middlewares/sanitizeMiddleware.js';
 
 const router = express.Router();
 
@@ -21,4 +21,4 @@ router.post('/deletecontent/:content/:id', authMiddleware, deleteContent);
 
 router.post('/updatecontent', authMiddleware, sanitizeMiddleware, updateContent);
 
-module.exports = router;
+export default router;

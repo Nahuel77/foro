@@ -1,8 +1,13 @@
-const express = require('express');
-const morgan = require('morgan');
-const cors = require('cors');
-const mongoose = require('mongoose');
-const dotenv = require('dotenv');
+import express from 'express';
+import morgan from 'morgan';
+import cors from 'cors';
+import mongoose from 'mongoose';
+import dotenv from 'dotenv';
+
+import authRoutes from './routes/auth.js';
+import postRoutes from './routes/postRoutes.js';
+import seccionesRoutes from './routes/seccionesRoutes.js';
+
 dotenv.config();
 
 const app = express();
@@ -25,9 +30,6 @@ app.use(morgan('dev'));
 app.use(express.json());
 
 // Rutas
-const authRoutes = require('./routes/auth');
-const postRoutes = require('./routes/postRoutes');
-const seccionesRoutes = require('./routes/seccionesRoutes');
 app.use('/api/auth', authRoutes);
 app.use('/api/posts', postRoutes);
 app.use('/api/secciones', seccionesRoutes);

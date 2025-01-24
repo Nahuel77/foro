@@ -1,5 +1,4 @@
-const mongoose = require('mongoose');
-const bcrypt = require('bcryptjs');
+import mongoose from 'mongoose';
 
 const SeccionSchema = new mongoose.Schema({
     title: { type: String, required: true },
@@ -7,5 +6,4 @@ const SeccionSchema = new mongoose.Schema({
     description: { type: String, required: true}
 });
 
-module.exports = mongoose.model('Seccion', SeccionSchema);
-//considerar añadir controlador y rutas para un panel de administrador con opciones como agregar seccion
+export default mongoose.model('Seccion', SeccionSchema);
