@@ -37,14 +37,25 @@ export const getLatestComments = () => {
   return API.get(`/api/posts/getlatestcomments`);
 };
 
-export const deleteContent = ({ content, id}: { content: string, id: string}) => {
+export const deleteContent = ({ content, id }: { content: string, id: string }) => {
   return API.post(`/api/posts/deletecontent/${content}/${id}`);
 };
 
-export const updateContent = (formData: { contentType: string, id: string, update: {content: string, title: string}})=>{
+export const updateContent = (formData: { contentType: string, id: string, update: { content: string, title: string } }) => {
   return API.post('/api/posts/updatecontent', formData);
 };
 
-export const passwordChange = (formData: {pass: string, newpass: string}) => {
+export const passwordChange = (formData: { pass: string, newpass: string }) => {
   return API.post('/api/auth/changepassword', formData);
-}
+};
+
+export const uploadpic = (data: { pic: File }) => {
+  const formData = new FormData();
+  formData.append("pic", data.pic);
+
+  return API.post('/api/auth/uploadpic', formData, {
+    headers: {
+      "Content-Type": "multipart/form-data",
+    },
+  });
+};

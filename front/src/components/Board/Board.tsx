@@ -13,7 +13,6 @@ interface BoardProps {
 
 const Board: React.FC<BoardProps> = ({ seccion, title, content, postsLengthCallBack, showContent }) => {
     const [posts, setPosts] = useState<any[]>([]);
-    console.log(showContent);
     const fetchPosts = async () => {
         if (content === 'post') {
             try {

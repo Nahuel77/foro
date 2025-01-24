@@ -12,6 +12,7 @@ Del lado del back:
 - bcryptjs
 - MongoDB (mongoose)
 - DOMPurify & JSDOM
+- Multer
 
 Del lado del front:
 - Vite y React

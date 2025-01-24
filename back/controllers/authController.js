@@ -47,7 +47,7 @@ const loginUser = async (req, res) => {
 const passwordChange = async (req, res) => {
     const { pass, newpass } = req.body;
     const userId = req.userId;
-    console.log(userId);
+
     if (!userId) return res.status(404).json({ error: 'Usuario no encontrado' });
 
     try {
@@ -67,4 +67,23 @@ const passwordChange = async (req, res) => {
     }
 }
 
-module.exports = { registerUser, loginUser, passwordChange };
+const picUpload = async (req, res) => {
+    const userId = req.userId;
+    if (!userId) return res.status(404).json({ error: 'Usuario no encontrado 1' });
+
+    try {
+        const user = await User.findById(userId);
+        if (!user) return res.status(404).json({ error: 'Usuario no encontrado 2' });
+
+        if (!req.file) return res.status(400).json({ error: "No se subió ninguna imagen." });
+
+        user.image = req.file.buffer;
+        await user.save();
+        res.status(200).json({ message: "Imagen subida y guardada con éxito." });
+    } catch (err) {
+        console.error('Error al subir la imagen: ', err);
+        res.status(500).json({ error: 'Error al subir la imagen', details: err.message });
+    }
+}
+
+module.exports = { registerUser, loginUser, passwordChange, picUpload };

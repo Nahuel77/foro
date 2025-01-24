@@ -1,10 +1,13 @@
 import React, { useState } from "react";
 import './User.css';
 import { useAuth } from "../../context/AuthContext";
-import { passwordChange } from "../../api/auth";
+import { passwordChange, uploadpic } from "../../api/auth";
 
 const User: React.FC = () => {
     const user = useAuth();
+    const [uploadStatus, setUploadStatus] = useState<string | null>(null);
+    const [profileImage, setProfileImage] = useState<string>(
+        localStorage.getItem("userProfileImage") || "/icon/user.png");
 
     const [formData, setFormData] = useState({
         oldpass: '',
@@ -19,7 +22,7 @@ const User: React.FC = () => {
     const handleChangePass = async () => {
         if (!formData.oldpass || !formData.newpass || !formData.repeatpass) {
             alert('Todos los campos deben completarse');
-        }else{
+        } else {
             if (formData.newpass === formData.repeatpass) {
                 try {
                     const response = await passwordChange({ pass: formData.oldpass, newpass: formData.newpass });
@@ -39,15 +42,51 @@ const User: React.FC = () => {
         }
     }
 
+    const handlePicUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
+        if (event.target.files && event.target.files.length > 0) {
+            const file = event.target.files[0];
+
+            try {
+                setUploadStatus("Subiendo archivo...");
+                await uploadFileToServer(file);
+                setUploadStatus("Archivo subido con éxito 🎉");
+            } catch (error) {
+                console.error("Error al subir el archivo:", error);
+                setUploadStatus("Error al subir el archivo ❌");
+            }
+        }
+    };
+
+    const uploadFileToServer = async (file: File) => {
+        try {
+            const response = await uploadpic({ pic: file });
+            if (response.status === 200) {
+                const imageUrl = URL.createObjectURL(file);
+                localStorage.setItem("userProfileImage", imageUrl);
+                setProfileImage(imageUrl);
+                setUploadStatus("Archivo subido con éxito 🎉");
+            }
+        } catch (err: any) {
+            console.error('Error al intentar subir el archivo: ', err.message);
+            setUploadStatus("Error al subir el archivo ❌");
+        }
+    }
+
     return (
         <>
             <div className="user-panel">
                 <h2>{user.userName}</h2>
                 <div className="panel-content">
+
                     <div className="panel-foto">
-                        <img src="/icon/user.png" alt="user" className="user-img" />
-                        <div className="boton-foto"><span className="head-span">Foto de perfil</span><button>Cargar</button></div>
+                        <img src={profileImage} alt="user" className="user-img" />
+                        <div className="boton-foto">
+                            <span className="head-span">Foto de perfil</span>
+                            <label htmlFor="file-upload" className="pic-upload-label">Cargar</label>
+                            <input id="file-upload" type="file" onChange={handlePicUpload} accept="image/*" />
+                        </div>
                     </div>
+
                     <div className="panel-contraseña">
                         <span className="head-span">Cambiar contraseña</span>
                         <input
