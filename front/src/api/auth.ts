@@ -38,24 +38,20 @@ export const getLatestComments = () => {
 };
 
 export const deleteContent = ({ content, id }: { content: string, id: string }) => {
-  return API.post(`/api/posts/deletecontent/${content}/${id}`);
+  return API.delete(`/api/posts/deletecontent/${content}/${id}`);
 };
 
 export const updateContent = (formData: { contentType: string, id: string, update: { content: string, title: string } }) => {
-  return API.post('/api/posts/updatecontent', formData);
+  return API.put('/api/posts/updatecontent', formData);
 };
 
 export const passwordChange = (formData: { pass: string, newpass: string }) => {
-  return API.post('/api/auth/changepassword', formData);
+  return API.put('/api/auth/changepassword', formData);
 };
 
 export const uploadpic = (data: { pic: File }) => {
   const formData = new FormData();
-  formData.append("pic", data.pic);
+  formData.append('file', data.pic);
 
-  return API.post('/api/auth/uploadpic', formData, {
-    headers: {
-      "Content-Type": "multipart/form-data",
-    },
-  });
+  return API.put('/api/auth/uploadpic', formData);
 };

@@ -70,19 +70,32 @@ export const passwordChange = async (req, res) => {
 
 export const picUpload = async (req, res) => {
     const userId = req.userId;
-    if (!userId) return res.status(404).json({ error: 'Error de autentificación' });
+    if (!userId) {
+        return res.status(401).json({ error: 'Error de autenticación: Usuario no identificado.' });
+    }
 
     try {
         const user = await User.findById(userId);
-        if (!user) return res.status(404).json({ error: 'Usuario no encontrado' });
+        if (!user) {
+            return res.status(404).json({ error: 'Usuario no encontrado.' });
+        }
 
-        if (!req.file) return res.status(400).json({ error: "No se subió ninguna imagen." });
+        if (!req.cloudinaryUrl) {
+            return res.status(400).json({ error: 'No se recibió la URL de la imagen.' });
+        }
 
-        user.image = req.file.buffer;
+        user.image = req.cloudinaryUrl;
         await user.save();
-        res.status(200).json({ message: "Imagen subida y guardada con éxito." });
+
+        res.status(200).json({
+            message: 'Imagen subida y guardada con éxito.',
+            imageUrl: req.cloudinaryUrl,
+        });
     } catch (err) {
-        console.error('Error al subir la imagen: ', err);
-        res.status(500).json({ error: 'Error al subir la imagen', details: err.message });
+        console.error('Error al subir la imagen a MongoDB:', err);
+        res.status(500).json({
+            error: 'Error interno al guardar la imagen en la base de datos.',
+            details: err.message,
+        });
     }
 }

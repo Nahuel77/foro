@@ -1,16 +1,39 @@
-import multer from 'multer';
+import { v2 as cloud } from 'cloudinary';
+import fileUpload from 'express-fileupload';
+import dotenv from 'dotenv';
 
-const storage = multer.memoryStorage();
-const upload = multer({ storage });
+dotenv.config();
 
-const uploadPicture = (req, res, next) => {
-    upload.single("pic")(req, res, (err) => {
-        if (err) {
-            console.error("Error en Multer:", err);
-            return res.status(500).json({ error: "Error al procesar el archivo" });
+cloud.config({
+    cloud_name: process.env.CLOUDINDARY_CLOUD_NAME,
+    api_key: process.env.CLOUDINDARY_API_KEY,
+    api_secret: process.env.CLOUDINDARY_API_SECRET,
+    secure: true,
+});
+
+export const createPath = fileUpload({
+    useTempFiles: true,
+    tempFileDir: './temp/'
+})
+
+export const CloudUpload = async (req, res, next) => {
+    try {
+        if (!req.files || Object.keys(req.files).length === 0) {
+            return res.status(400).json({ message: 'No se subió ningún archivo' });
         }
-        next();
-    });
-};
 
-export default uploadPicture;
+        const uploadedFile = req.files.file;
+
+        const result = await cloud.uploader.upload(uploadedFile.tempFilePath, {
+            folder: 'foro',
+        });
+
+        req.cloudinaryUrl = result.secure_url;
+        console.log(req.cloudinaryUrl);
+
+        next();
+    } catch (error) {
+        console.error('Error al subir a Cloudinary:', error);
+        res.status(500).json({ message: 'Error al subir la imagen', error: error.message });
+    }
+};

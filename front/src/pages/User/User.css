@@ -20,6 +20,9 @@
 
 .user-img {
     max-width: 8rem;
+    width: 8rem;
+    height: 8rem;
+    object-fit: cover;
     border-radius: 40%;
     margin: 1rem;
 }

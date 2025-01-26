@@ -48,7 +48,7 @@ const Comments: React.FC<CommentProps> = ({ id }) => {
 
     const saveEdit = async () => {
         try {
-            const response = updateContent({contentType: 'Comment', id: idOnEdit, update: {content: contentUpdate, title: ''}});
+            const response = updateContent({ contentType: 'Comment', id: idOnEdit, update: { content: contentUpdate, title: '' } });
             fetchComments();
             setOnEdit(false);
         } catch (err) {
@@ -65,9 +65,16 @@ const Comments: React.FC<CommentProps> = ({ id }) => {
             {comments.length > 0 ? (
                 comments.map((comment) => {
                     const sanitizedContent = DOMPurify.sanitize(comment.content);
+                    const avatar = comment.user?.image || "/icon/user.png";
                     return (
                         <div key={comment._id}>
                             <div className='comment-header'>
+                                <img
+                                    src={avatar}
+                                    alt={comment.user}
+                                    className="avatar"
+                                    onError={() => { setAvatar("/icon/user.png") }}
+                                />
                                 <h4>{comment.userName}</h4>
                                 <span>{new Date(comment.date).toLocaleString()}</span>
                             </div>
@@ -81,7 +88,7 @@ const Comments: React.FC<CommentProps> = ({ id }) => {
                                                 <button onClick={() => { handleEdit(comment._id) }} className='comment-button'>Editar</button>
                                                 <button className='comment-button'>Citar</button>
                                             </>) : (<>
-                                                <Redactor content={sanitizedContent} setContent={setContentUpdate} onSave={saveEdit} state='edit' onCancel={handleCancel}/>
+                                                <Redactor content={sanitizedContent} setContent={setContentUpdate} onSave={saveEdit} state='edit' onCancel={handleCancel} />
                                             </>)
                                             }
                                         </>) : (

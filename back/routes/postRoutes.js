@@ -17,8 +17,8 @@ router.get('/getcomments/:id', getComments);
 
 router.get('/getlatestcomments', getLatestComments);
 
-router.post('/deletecontent/:content/:id', authMiddleware, deleteContent);
+router.delete('/deletecontent/:content/:id', authMiddleware, deleteContent);
 
-router.post('/updatecontent', authMiddleware, sanitizeMiddleware, updateContent);
+router.put('/updatecontent', authMiddleware, sanitizeMiddleware, updateContent);
 
 export default router;

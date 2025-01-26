@@ -40,7 +40,7 @@ export const getPosts = async (req, res) => {
 
 export const getPostById = async (req, res) => {
     try {
-        const post = await Post.findById(req.params.id);
+        const post = await Post.findById(req.params.id).populate('user', 'image');
         if (!post) return res.status(404).json({ error: 'Post no encontrado' });
         res.status(200).json(post);
     } catch (err) {
@@ -71,7 +71,7 @@ export const getComments = async (req, res) => {
     try {
         const { id } = req.params;
         const postId = new mongoose.Types.ObjectId(id);
-        const comments = await Comment.find({ postId })
+        const comments = await Comment.find({ postId }).populate('user', 'image userName')
             .sort({ date: -1 })
             .exec();
         if (!comments) return res.status(404).json({ error: 'Comentario no encontrado' });
@@ -104,6 +104,11 @@ export const getLatestComments = async (req, res) => {
 
 export const deleteContent = async (req, res) => {
     const { content, id } = req.params;
+    const user = req.userId;
+
+    if (!user) {
+        return res.status(400).json({ error: 'Error de autenticación' });
+    }
     
     if (content === 'Post') {
         try {

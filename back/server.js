@@ -13,7 +13,7 @@ dotenv.config();
 const app = express();
 
 // Conexión a la BD
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/foro', {
+mongoose.connect(process.env.MONGODB_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,    
 })

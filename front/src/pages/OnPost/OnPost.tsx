@@ -12,11 +12,17 @@ const OnPost: React.FC = () => {
     const [post, setPost] = useState<any | null>(null);
     const { userId } = useAuth();
     const navigate = useNavigate();
+    const [avatar, setAvatar] = useState<string>("/icon/user.png")
 
     const fetchPosts = async () => {
         try {
             const response = await getPostById(id as string);
             setPost(response.data);
+            if(response.data.user.image != undefined || response.data.user.image != null){
+                setAvatar(response.data.user.image);
+            }else{
+                setAvatar("/icon/user.png");
+            }
         } catch (err) {
             console.error('Error al cargar el post: ', err);
         }
@@ -63,6 +69,12 @@ const OnPost: React.FC = () => {
             <div className='post-container'>
                 <h2 className='post-title'>{post.title}</h2>
                 <div className='post-header'>
+                    <img
+                        src={avatar}
+                        alt={post.user}
+                        className="avatar"
+                        onError={() => { setAvatar("/icon/user.png") }}
+                    />
                     <h3>autor: {post.userName}</h3>
                     <span>fecha: {fechaFormateada}</span>
                 </div>

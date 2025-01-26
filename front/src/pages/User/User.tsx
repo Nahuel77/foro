@@ -16,13 +16,11 @@ const User: React.FC = () => {
     });
 
     useEffect(()=>{
-        if(user.avatar !== null){
-            // const imageUrl = URL.createObjectURL(user.avatar);
-            // setProfileImage(imageUrl);
-            console.log('Habemus avatar');
+        if(user.avatar != null || user.avatar != undefined){
+            setProfileImage(user.avatar);
+            localStorage.setItem("userProfileImage", user.avatar);
         }else{
-            console.log('No llego nada');
-            setProfileImage("/icon/user.png");
+            setProfileImage('/icon/user.png');
         }
     }, []);
 
