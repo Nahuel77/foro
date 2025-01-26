@@ -12,6 +12,7 @@ Del lado del back:
 - bcryptjs
 - MongoDB (mongoose)
 - DOMPurify & JSDOM
+- Express-fileupload
 - cloudinary
 
 Del lado del front:

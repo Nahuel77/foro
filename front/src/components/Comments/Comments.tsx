@@ -73,7 +73,6 @@ const Comments: React.FC<CommentProps> = ({ id }) => {
                                     src={avatar}
                                     alt={comment.user}
                                     className="avatar"
-                                    onError={() => { setAvatar("/icon/user.png") }}
                                 />
                                 <h4>{comment.userName}</h4>
                                 <span>{new Date(comment.date).toLocaleString()}</span>
