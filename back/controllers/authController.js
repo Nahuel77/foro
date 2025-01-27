@@ -1,6 +1,7 @@
 import User from '../models/users.js';
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcryptjs';
+import fs from 'fs-extra';
 
 export const registerUser = async (req, res) => {
     const { userName, email, password } = req.body;
@@ -86,6 +87,11 @@ export const picUpload = async (req, res) => {
 
         user.image = req.cloudinaryUrl;
         await user.save();
+
+        const tempFilePath = req.files?.file?.tempFilePath;
+        if (tempFilePath) {
+            await fs.unlink(tempFilePath);
+        }
 
         res.status(200).json({
             message: 'Imagen subida y guardada con éxito.',

@@ -29,7 +29,6 @@ export const CloudUpload = async (req, res, next) => {
         });
 
         req.cloudinaryUrl = result.secure_url;
-        console.log(req.cloudinaryUrl);
 
         next();
     } catch (error) {

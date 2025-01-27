@@ -18,9 +18,9 @@ const OnPost: React.FC = () => {
         try {
             const response = await getPostById(id as string);
             setPost(response.data);
-            if(response.data.user.image != undefined || response.data.user.image != null){
+            if (response.data.user.image != undefined || response.data.user.image != null) {
                 setAvatar(response.data.user.image);
-            }else{
+            } else {
                 setAvatar("/icon/user.png");
             }
         } catch (err) {
@@ -81,7 +81,7 @@ const OnPost: React.FC = () => {
                 <div className='post-body'>
                     <div className='post-content' dangerouslySetInnerHTML={{ __html: sanitizedContent }} />
                     {userId !== null ? (
-                        userId === post.user ? (
+                        userId === post.user._id ? (
                             <>
                                 <button onClick={handleDelete} className='comment-button'>Borrar</button>
                                 <button onClick={handleEdit} className='comment-button'>Editar</button>

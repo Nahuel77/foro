@@ -80,7 +80,7 @@ const Comments: React.FC<CommentProps> = ({ id }) => {
                             <div className='comment-body'>
                                 <div className='comment-content' dangerouslySetInnerHTML={{ __html: sanitizedContent }} />
                                 {userId !== null ? (
-                                    userId === comment.user ? (
+                                    userId === comment.user._id ? (
                                         <>
                                             {onEdit !== true ? (<>
                                                 <button onClick={() => { handleDelete(comment._id) }} className='comment-button'>Borrar</button>
