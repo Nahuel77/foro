@@ -10,12 +10,20 @@ interface CommentProps {
     id: string;
 }
 
+interface QuoteData{
+    text: string;
+    userName: string;
+    date: string;
+    avatar?: string;
+}
+
 const Comments: React.FC<CommentProps> = ({ id }) => {
     const [comments, setComments] = useState<any[]>([]);
     const [contentUpdate, setContentUpdate] = useState('');
     const { isAuthenticated, userId } = useAuth();
     const [onEdit, setOnEdit] = useState<Boolean>(false);
     const [idOnEdit, setIdOnEdit] = useState<string>('');
+    const [quote, setQuote] = useState<QuoteData | null>(null);
 
     const fetchComments = async () => {
         try {
@@ -44,6 +52,10 @@ const Comments: React.FC<CommentProps> = ({ id }) => {
     const handleEdit = (commentId: string) => {
         setOnEdit(true);
         setIdOnEdit(commentId);
+        const commentToEdit = comments.find((comment) => comment._id === commentId);
+        if (commentToEdit) {
+            setContentUpdate(commentToEdit.content);
+        }
     }
 
     const saveEdit = async () => {
@@ -59,6 +71,16 @@ const Comments: React.FC<CommentProps> = ({ id }) => {
     const handleCancel = () => {
         setOnEdit(false);
     }
+
+    const handleQuote = (comment: any) => {
+        const quoteData: QuoteData = {
+            text: comment.content,
+            userName: comment.userName,
+            date: comment.date,
+            avatar: comment.user?.image || '/icon/user.png',
+        };
+        setQuote(quoteData);
+    };
 
     return (
         <>
@@ -82,17 +104,24 @@ const Comments: React.FC<CommentProps> = ({ id }) => {
                                 {userId !== null ? (
                                     userId === comment.user._id ? (
                                         <>
-                                            {onEdit !== true ? (<>
-                                                <button onClick={() => { handleDelete(comment._id) }} className='comment-button'>Borrar</button>
-                                                <button onClick={() => { handleEdit(comment._id) }} className='comment-button'>Editar</button>
-                                                <button className='comment-button'>Citar</button>
-                                            </>) : (<>
-                                                <Redactor content={sanitizedContent} setContent={setContentUpdate} onSave={saveEdit} state='edit' onCancel={handleCancel} />
-                                            </>)
-                                            }
+                                            {onEdit && idOnEdit === comment._id ? (
+                                                <Redactor
+                                                    content={contentUpdate}
+                                                    setContent={setContentUpdate}
+                                                    onSave={saveEdit}
+                                                    state="edit"
+                                                    onCancel={handleCancel}
+                                                />
+                                            ) : (
+                                                <>
+                                                    <button onClick={() => handleDelete(comment._id)} className="comment-button">Borrar</button>
+                                                    <button onClick={() => handleEdit(comment._id)} className="comment-button">Editar</button>
+                                                    <button onClick={() => handleQuote(comment._id)} className="comment-button">Citar</button>
+                                                </>
+                                            )}
                                         </>) : (
                                         <>
-                                            <button className='comment-button'>Citar</button>
+                                            <button onClick={() => handleQuote(comment._id)} className='comment-button'>Citar</button>
                                         </>
                                     )
                                 ) : (<>
@@ -106,7 +135,7 @@ const Comments: React.FC<CommentProps> = ({ id }) => {
             {!isAuthenticated ? (
                 <></>
             ) : (
-                <AddComment postId={id} commentRefreshCallBack={fetchComments} />
+                <AddComment postId={id} commentRefreshCallBack={fetchComments} quote={quote} />
             )}
         </>
     )

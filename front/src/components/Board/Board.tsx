@@ -45,40 +45,27 @@ const Board: React.FC<BoardProps> = ({ seccion, title, content, postsLengthCallB
                 <h2 className="board-head">{title}</h2>
                 <div>
                     {posts.length > 0 ? (
-                        posts.map((post) =>
-                            content === 'post' ? (
-
+                        posts.map((post) => {
+                            const postKey = post._id || (post.postId && post.postId._id);
+                            return content === 'post' ? (
                                 <Post
-                                    key={post._id}
+                                    key={postKey}
                                     id={post._id}
                                     title={post.title}
                                     userName={post.userName}
                                     date={post.createdAt}
                                 />
                             ) : (
-                                showContent ? (
-                                    <>
-                                        <Post
-                                            key={post._id}
-                                            id={post.postId._id}
-                                            title={post.postId.title}
-                                            userName={post.userName}
-                                            date={post.date}
-                                            content={post.content}
-                                        />
-                                    </>
-                                ) : (
-                                    <>
-                                        <Post
-                                            key={post._id}
-                                            id={post.postId._id}
-                                            title={post.postId.title}
-                                            userName={post.userName}
-                                            date={post.date}
-                                        />
-                                    </>
-                                )
-                            ))
+                                <Post
+                                    key={postKey}
+                                    id={post.postId._id}
+                                    title={post.postId.title}
+                                    userName={post.userName}
+                                    date={post.date}
+                                    content={showContent ? post.content : undefined}
+                                />
+                            );
+                        })
                     ) : (
                         <p className="no-post">Nada disponible aún.</p>
                     )}

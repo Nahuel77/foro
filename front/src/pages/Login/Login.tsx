@@ -20,8 +20,12 @@ const Login: React.FC = () => {
             const response = await loginAPI(formData);
             if (response.status === 200) {
                 const { token, userName, userId, avatar } = response.data;
+                const userAvatar = avatar || '/icon/user.png';
                 localStorage.setItem('token', token);
-                login('user', userName, userId, avatar);
+                localStorage.setItem('userName', userName);
+                localStorage.setItem('userId', userId);
+                localStorage.setItem('userProfileImage', userAvatar);
+                login('user', userName, userId, userAvatar);
                 navigate('/');
             }
         } catch (err: any) {

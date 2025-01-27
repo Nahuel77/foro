@@ -6,39 +6,44 @@ interface AuthContextType {
     userName: string | null;
     userId: string | null;
     avatar: string | null;
-    login: (role: 'admin' | 'user', userName: string, userId: string, avatar: string )=>void;
-    logout: ()=>void;
+    login: (role: 'admin' | 'user', userName: string, userId: string, avatar: string) => void;
+    logout: () => void;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
-export const AuthProvider: React.FC<{ children: ReactNode}>=({children})=>{
+export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
-    const [userRole, setUserRole] = useState<'admin'|'user'|null>(null);
+    const [userRole, setUserRole] = useState<'admin' | 'user' | null>(null);
     const [userName, setUserName] = useState<string | null>(null);
     const [userId, setUserId] = useState<string | null>(null);
     const [avatar, setAvatar] = useState<string | null>(null);
 
-    useEffect(()=>{
+    useEffect(() => {
         const token = localStorage.getItem('token');
-        if(token){
-            const decodedToken = JSON.parse(atob(token.split('.')[1]));
+        if (token) {
             setIsAuthenticated(true);
-            setUserRole(decodedToken.role);
-            setUserName(decodedToken.userName);
-            setUserId(decodedToken._id);
+            const savedUserName = localStorage.getItem('userName');
+            const savedUserId = localStorage.getItem('userId');
+            const savedUserAvatar = localStorage.getItem("userProfileImage");
+
+            if (savedUserName && savedUserId) {
+                setUserName(savedUserName);
+                setUserId(savedUserId);
+                setAvatar(savedUserAvatar);
+            }
         }
     }, []);
-    
-    const login = (role: 'admin' | 'user', userName: string, userId: string, avatar: string )=>{
+
+    const login = (role: 'admin' | 'user', userName: string, userId: string, avatar: string) => {
         setIsAuthenticated(true);
         setUserRole(role);
         setUserName(userName);
         setUserId(userId);
         setAvatar(avatar);
     };
-    
-    const logout=()=>{
+
+    const logout = () => {
         setIsAuthenticated(false);
         setUserRole(null);
         setUserName(null);
@@ -48,16 +53,16 @@ export const AuthProvider: React.FC<{ children: ReactNode}>=({children})=>{
         localStorage.removeItem('token');
     };
 
-    return(
+    return (
         <AuthContext.Provider value={{ isAuthenticated, userRole, userName, login, logout, userId, avatar }}>
             {children}
         </AuthContext.Provider>
     );
 };
 
-export const useAuth = ()=>{
+export const useAuth = () => {
     const context = useContext(AuthContext);
-    if(!context){
+    if (!context) {
         throw new Error('useAuth debe ser usado dentro de un AuthProvider');
     }
     return context;
