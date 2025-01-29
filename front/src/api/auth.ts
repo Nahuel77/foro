@@ -1,5 +1,11 @@
 import API from './api';
 
+interface Quote {
+  userName: string | null;
+  date: string | null;
+  text: string | null;
+}
+
 export const register = (formData: { email: string; password: string; userName: string }) => {
   return API.post('/api/auth/register', formData);
 };
@@ -25,7 +31,12 @@ export const getSections = (queryParams: { [key: string]: any } = {}) => {
   return API.get(`/api/secciones/getsection${query ? `?${query}` : ''}`);
 };
 
-export const newComment = (formData: { content: string; userName: string; postId: string, quote: Array }) => {
+export const newComment = (formData: {
+  content: string;
+  userName: string;
+  postId: string,
+  quote: Quote[];
+}) => {
   return API.post('/api/posts/newcomment', formData);
 };
 

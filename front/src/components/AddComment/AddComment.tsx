@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useAuth } from '../../context/AuthContext';
 import Redactor from '../Redactor/Redactor';
 import './AddComment.css';
@@ -21,7 +21,7 @@ const AddComment: React.FC<AddCommentProps> = ({ postId, commentRefreshCallBack 
             return;
         }
         try {
-            const response = await newComment({ content, userName, postId, quotes });
+            const response = await newComment({ content, userName, postId, quote: quotes });
             commentRefreshCallBack();
             setContent('');
             clearQuotes();

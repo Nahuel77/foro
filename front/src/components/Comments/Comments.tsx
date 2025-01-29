@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { JSXElementConstructor, Key, ReactElement, ReactNode, ReactPortal, useEffect, useState } from 'react';
 import { deleteContent, getComments, updateContent } from '../../api/auth';
 import './Comments.css';
 import DOMPurify from "dompurify";
@@ -17,7 +17,7 @@ const Comments: React.FC<CommentProps> = ({ id }) => {
     const { isAuthenticated, userId } = useAuth();
     const [onEdit, setOnEdit] = useState<Boolean>(false);
     const [idOnEdit, setIdOnEdit] = useState<string>('');
-    const { addQuote } = useQuote();
+    const { addQuote, quotes } = useQuote();
 
     const fetchComments = async () => {
         try {
@@ -97,6 +97,29 @@ const Comments: React.FC<CommentProps> = ({ id }) => {
                                 <span>{new Date(comment.date).toLocaleString()}</span>
                             </div>
                             <div className='comment-body'>
+                                {comment.quote.length > 0 ? (
+                                    comment.quote.map((quote: { text: string; date: string; userName: string }, index: Key | null | undefined) => {
+                                        const text = quote.text;
+                                        const sanitizedContent = text ? DOMPurify.sanitize(text) : "Contenido no disponible";
+                                        const date = quote.date;
+                                        const formattedDate = date ? new Date(date).toLocaleString() : "Fecha no disponible";
+                                        return (
+                                            <>
+                                                <div className="quote" key={index}>
+                                                    <div className="quote-header">
+                                                        <div className="quote-info">
+                                                            <h4>@{quote.userName}</h4><p>dijo el</p>
+                                                            <span> {formattedDate}</span>
+                                                        </div>
+                                                    </div>
+                                                    <div dangerouslySetInnerHTML={{ __html: sanitizedContent }} />
+                                                </div>
+                                            </>
+                                        );
+                                    })
+                                ) : (
+                                    <></>
+                                )}
                                 <div className='comment-content' dangerouslySetInnerHTML={{ __html: sanitizedContent }} />
                                 {userId !== null ? (
                                     userId === comment.user._id ? (
