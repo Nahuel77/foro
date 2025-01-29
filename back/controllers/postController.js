@@ -116,6 +116,7 @@ export const deleteContent = async (req, res) => {
             if (!deletedPost) {
                 return res.status(404).json({ message: 'Post no encontrado' });
             }
+            await Comment.deleteMany({ postId: id });
             res.status(202).json({ message: 'Post eliminado con exito' });
         } catch (err) {
             console.error('Error al borrar contenido. ', err);
