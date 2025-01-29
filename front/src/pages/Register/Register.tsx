@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import './Register.css';
 import { register } from '../../api/auth.ts';
+import { useNavigate } from "react-router-dom";
 
 const Register: React.FC = () => {
+    const navigate = useNavigate();
 
     const [formData, setFormData] = useState({
         userName: '',
@@ -20,6 +22,7 @@ const Register: React.FC = () => {
             // console.log(formData);
             const response = await register(formData);
             alert("Registro exitoso");
+            navigate('/login');
         } catch (err: any) {
             alert('Error en el registro: ' + err.response.data.message);
         }

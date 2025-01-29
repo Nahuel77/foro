@@ -54,6 +54,7 @@ const OnPost: React.FC = () => {
             try {
                 const response = deleteContent({ content: 'Post', id: post._id });
                 alert('Post eliminado');
+                
                 navigate('/');
             } catch (err: any) {
                 console.error('Error al crear el post: ', err.response?.data || err.message);

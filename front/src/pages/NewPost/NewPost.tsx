@@ -4,8 +4,9 @@ import Redactor from "../../components/Redactor/Redactor";
 import { newPost } from "../../api/auth";
 import { useAuth } from "../../context/AuthContext";
 import { useNavigate, useLocation } from "react-router-dom";
+import { QuoteProvider } from "../../context/QuoteContext";
 
-const NewPost: React.FC = () => {
+const NuevoPost: React.FC = () => {
     const [title, setTitle] = useState('');
     const [content, setContent] = useState('');
     const location = useLocation();
@@ -19,11 +20,11 @@ const NewPost: React.FC = () => {
             alert('No Name');
             return;
         }
-        
+
         try {
             const response = await newPost({ title, content, seccion, userName });
             alert('Post agregado');
-            navigate('/');
+            navigate(`/post/${response.data.post._id}`);
         } catch (err: any) {
             console.error('Error al crear el post: ', err.response?.data || err.message);
             alert('Error al intentar crear el post');
@@ -48,6 +49,10 @@ const NewPost: React.FC = () => {
             </div>
         </>
     )
+}
+
+const NewPost: React.FC = () => {
+    return <QuoteProvider><NuevoPost /></QuoteProvider>
 }
 
 export default NewPost;

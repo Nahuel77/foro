@@ -22,7 +22,7 @@ const User: React.FC = () => {
         }else{
             setProfileImage('/icon/user.png');
         }
-    }, []);
+    }, [user.avatar]);
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -71,6 +71,7 @@ const User: React.FC = () => {
             const response = await uploadpic({ pic: file });
             if (response.status === 200) {
                 const imageUrl = URL.createObjectURL(file);
+                localStorage.setItem("userProfileImage", imageUrl);
                 setProfileImage(imageUrl);
                 setUploadStatus("Archivo subido con éxito 🎉");
             } else {
