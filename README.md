@@ -1,6 +1,8 @@
 <h1>Foro</h1>
 <br/>
-Este proyecto pretende ser un foro funcional, aunque quizas no termine siendo desplegado a un host servicio de backend.
+https://youtu.be/qageRuaFNlk
+<br/>
+Este proyecto pretende ser un foro funcional, aunque quizas no termine siendo desplegado a un host servicio de backend. Ya que es solo una practica para no olvidar o descuidar el conocimiento en algunas tecnologías
 Es un proyecto original, desarrollado desde cero con las siguientes tecnologías:<br/>
 <br/>
 
@@ -20,5 +22,3 @@ Del lado del front:
 - Axios
 - Quill.js (Para el procesamiento de textos en la creación de posteos)
 - DOMPurify
-
-Aun en desarrollo.
