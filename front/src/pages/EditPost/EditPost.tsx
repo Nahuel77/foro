@@ -3,22 +3,28 @@ import './EditPost.css';
 import Redactor from "../../components/Redactor/Redactor";
 import { useNavigate, useLocation } from "react-router-dom";
 import { updateContent } from "../../api/auth";
+import { QuoteProvider } from "../../context/QuoteContext";
 
-const EditPost: React.FC = () => {
-    const [content, setContent] = useState('');
+const EditorPost: React.FC = () => {
     const location = useLocation();
     const { id, titleUpdate, contentUpdate } = location.state || {};
     const [title, setTitle] = useState(titleUpdate);
+    const [content, setContent] = useState(contentUpdate);
     const navigate = useNavigate();
 
-    const handleSavePost = async ()=>{
+    const handleSavePost = async () => {
         try {
-            const response = updateContent({contentType: 'Post', id: id, update: {content, title }});
+            const response = updateContent({ contentType: 'Post', id: id, update: { content, title } });
             alert('Post editado');
             navigate(`/post/${id}`);
-        }catch (err){
+        } catch (err) {
             console.error("Error al actualizar el post: ", err);
         }
+    }
+
+    const handleCancel = () => {
+        navigate(`/post/${id}`);
+
     }
 
     return (
@@ -30,16 +36,20 @@ const EditPost: React.FC = () => {
                         <span className="post-title">Titulo: </span>
                         <input
                             type="text"
-                            className="title-input"
+                            className="title-input" 
                             defaultValue={titleUpdate}
                             // value={titleUpdate}
                             onChange={(e) => setTitle(e.target.value)} />
                     </div>
-                    <Redactor content={contentUpdate} setContent={setContent} onSave={handleSavePost} />
+                    <Redactor content={content} setContent={setContent} onSave={handleSavePost} state="edit" onCancel={handleCancel} />
                 </div>
             </div>
         </>
     )
+}
+
+const EditPost: React.FC = () => {
+    return <QuoteProvider><EditorPost /></QuoteProvider>
 }
 
 export default EditPost;
