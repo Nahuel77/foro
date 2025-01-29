@@ -5,16 +5,10 @@ import DOMPurify from "dompurify";
 import { useAuth } from '../../context/AuthContext';
 import AddComment from '../AddComment/AddComment';
 import Redactor from '../Redactor/Redactor';
+import { useQuote } from '../../context/QuoteContext';
 
 interface CommentProps {
     id: string;
-}
-
-interface QuoteData{
-    text: string;
-    userName: string;
-    date: string;
-    avatar?: string;
 }
 
 const Comments: React.FC<CommentProps> = ({ id }) => {
@@ -23,7 +17,7 @@ const Comments: React.FC<CommentProps> = ({ id }) => {
     const { isAuthenticated, userId } = useAuth();
     const [onEdit, setOnEdit] = useState<Boolean>(false);
     const [idOnEdit, setIdOnEdit] = useState<string>('');
-    const [quote, setQuote] = useState<QuoteData | null>(null);
+    const { addQuote } = useQuote();
 
     const fetchComments = async () => {
         try {
@@ -72,15 +66,18 @@ const Comments: React.FC<CommentProps> = ({ id }) => {
         setOnEdit(false);
     }
 
-    const handleQuote = (comment: any) => {
-        const quoteData: QuoteData = {
-            text: comment.content,
-            userName: comment.userName,
-            date: comment.date,
-            avatar: comment.user?.image || '/icon/user.png',
-        };
-        setQuote(quoteData);
-    };
+    const handleQuote = (commentId: string) => {
+        const commentToQuote = comments.find((comment) => comment._id === commentId);
+        if (commentToQuote) {
+            addQuote(
+                {
+                    userName: commentToQuote.userName,
+                    date: commentToQuote.date,
+                    text: commentToQuote.content
+                }
+            );
+        }
+    }
 
     return (
         <>
@@ -135,7 +132,7 @@ const Comments: React.FC<CommentProps> = ({ id }) => {
             {!isAuthenticated ? (
                 <></>
             ) : (
-                <AddComment postId={id} commentRefreshCallBack={fetchComments} quote={quote} />
+                <AddComment postId={id} commentRefreshCallBack={fetchComments} />
             )}
         </>
     )

@@ -6,13 +6,16 @@ import { deleteContent, getPostById } from '../../api/auth';
 import DOMPurify from "dompurify";
 import { useAuth } from '../../context/AuthContext';
 import Comments from '../../components/Comments/Comments';
+import { QuoteProvider } from '../../context/QuoteContext';
+import { useQuote } from '../../context/QuoteContext';
 
 const OnPost: React.FC = () => {
     const { id } = useParams<{ id: string }>();
     const [post, setPost] = useState<any | null>(null);
     const { userId } = useAuth();
     const navigate = useNavigate();
-    const [avatar, setAvatar] = useState<string>("/icon/user.png")
+    const [avatar, setAvatar] = useState<string>("/icon/user.png");
+    const { addQuote } = useQuote();
 
     const fetchPosts = async () => {
         try {
@@ -63,6 +66,16 @@ const OnPost: React.FC = () => {
         navigate('/editpost', { state: { id: post._id, titleUpdate: post.title, contentUpdate: sanitizedContent } });
     }
 
+    const handleQuote = () => {
+        addQuote(
+            {
+                userName: post.userName,
+                date: fechaFormateada,
+                text: sanitizedContent
+            }
+        );
+    }
+
     return (
         <>
             <Navbar />
@@ -85,10 +98,10 @@ const OnPost: React.FC = () => {
                             <>
                                 <button onClick={handleDelete} className='comment-button'>Borrar</button>
                                 <button onClick={handleEdit} className='comment-button'>Editar</button>
-                                <button className='comment-button'>Citar</button>
+                                <button onClick={handleQuote} className='comment-button'>Citar</button>
                             </>) : (
                             <>
-                                <button className='comment-button'>Citar</button>
+                                <button onClick={handleQuote} className='comment-button'>Citar</button>
                             </>
                         )
                     ) : (
@@ -108,4 +121,8 @@ const OnPost: React.FC = () => {
     )
 }
 
-export default OnPost;
+const Thread: React.FC = () => {
+    return <QuoteProvider><OnPost /></QuoteProvider>;
+}
+
+export default Thread;

@@ -2,20 +2,23 @@
     display: flex;
     flex-direction: column;
     margin: 1rem;
+    padding: 2rem;
+    border-radius: 1rem;
+    background-color: var(--background-contrast);
 }
 
 .editor-container {
-    height: 20rem;
+    height: auto;
 }
 
 .ql-toolbar{
     background-color: rgb(234, 234, 236);
-    height: 3rem;
+    height: auto;
 }
 
 .ql-editor{
     background-color: rgb(234, 234, 236);
-    height: 100%;
+    height: auto;
 }
 
 .text-form{
@@ -24,7 +27,7 @@
 }
 
 .btn-editor{
-    margin: 1rem 0;
+    margin: 5rem 0 0 0;
     align-self: flex-end;
 }
 
@@ -34,4 +37,34 @@
 
 .agregar:hover, .ver:hover{
     color: #535bf2;
+}
+
+.quote{
+    background-color: var(--button-background-light);
+    padding: 1rem;
+    margin-bottom: 2rem;
+    border-radius: 1rem;
+}
+
+.quote-header{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.quote-info > p {
+    margin-right: .5rem;
+}
+
+.quote-info{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.delete-quote{
+    background-color: var(--background-contrast);
+    position: relative;
+    right: 0;
 }

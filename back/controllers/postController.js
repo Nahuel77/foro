@@ -49,7 +49,7 @@ export const getPostById = async (req, res) => {
 };
 
 export const createComment = async (req, res) => {
-    const { content, userName, postId } = req.body;
+    const { content, userName, postId, quote } = req.body;
     const user = req.userId;
 
     if (!user) {
@@ -57,7 +57,7 @@ export const createComment = async (req, res) => {
     }
 
     try {
-        const comment = new Comment({ content, userName, user, postId });
+        const comment = new Comment({ content, userName, user, postId, quote });
         await comment.save();
 
         res.status(201).json({ message: 'Post agregado existosamente', comment });

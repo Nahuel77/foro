@@ -25,7 +25,7 @@ export const getSections = (queryParams: { [key: string]: any } = {}) => {
   return API.get(`/api/secciones/getsection${query ? `?${query}` : ''}`);
 };
 
-export const newComment = (formData: { content: string; userName: string; postId: string }) => {
+export const newComment = (formData: { content: string; userName: string; postId: string, quote: Array }) => {
   return API.post('/api/posts/newcomment', formData);
 };
 
